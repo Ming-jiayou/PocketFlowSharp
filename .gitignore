@@ -1,0 +1,20 @@
+# BizTalk build output
+*.btp.cs
+*.btm.cs
+*.odx.cs
+*.xsd.cs
+
+# OpenCover UI analysis results
+OpenCover/
+
+# Azure Stream Analytics local run output 
+ASALocalRun/
+
+# MSBuild Binary and Structured Log
+*.binlog
+
+# MFractors (Xamarin productivity tool) working folder 
+.mfractor/
+**/bin/
+**/obj/
+**/.vs/
