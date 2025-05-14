@@ -18,3 +18,4 @@ ASALocalRun/
 **/bin/
 **/obj/
 **/.vs/
+/PocketFlowSharpSamples.Console/Web_Search_Agent/.env

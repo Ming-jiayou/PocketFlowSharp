@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketFlowSharp", "PocketFlowSharp.csproj", "{0EC5A8B2-E35D-4349-BDEB-63C3A6352803}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketFlowSharp", "PocketFlowSharp\PocketFlowSharp.csproj", "{0EC5A8B2-E35D-4349-BDEB-63C3A6352803}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PocketFlowSharpSamples.Console", "PocketFlowSharpSamples.Console", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_Search_Agent", "PocketFlowSharpSamples.Console\Web_Search_Agent\Web_Search_Agent.csproj", "{0309A3C8-A938-4C6F-9840-73E011299A6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,9 +19,16 @@ Global
 		{0EC5A8B2-E35D-4349-BDEB-63C3A6352803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0EC5A8B2-E35D-4349-BDEB-63C3A6352803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0EC5A8B2-E35D-4349-BDEB-63C3A6352803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0309A3C8-A938-4C6F-9840-73E011299A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0309A3C8-A938-4C6F-9840-73E011299A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0309A3C8-A938-4C6F-9840-73E011299A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0309A3C8-A938-4C6F-9840-73E011299A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0309A3C8-A938-4C6F-9840-73E011299A6C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD442CD0-9106-4522-A495-4A92FD91EDBA}
