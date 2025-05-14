@@ -79,22 +79,15 @@ namespace PocketFlowSharp
             return _Run(shared);
         }
 
-        public static BaseNode operator -(BaseNode left, BaseNode right)
+        public static BaseNode operator -(BaseNode node, string action)
+        {
+            node.Next(node, action);
+            return node;
+        }
+
+        public static BaseNode operator +(BaseNode left, BaseNode right)
         {
             return left.Next(right);
-        }
-
-        public static ConditionalTransition operator -(BaseNode node, string action)
-        {
-            return new ConditionalTransition(node, action);
-        }
-
-        // 可选：实现其他操作符重载作为快捷方式
-        public static ConditionalTransition operator -(BaseNode node, (string actionName, object value) actionWithParam)
-        {
-            var nodeClone = (BaseNode)((ICloneable)node).Clone();
-            nodeClone.Params[actionWithParam.actionName] = actionWithParam.value;
-            return new ConditionalTransition(nodeClone, actionWithParam.actionName);
-        }
+        }       
     }
 }
