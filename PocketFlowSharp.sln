@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PocketFlowSharpSamples.Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web_Search_Agent", "PocketFlowSharpSamples.Console\Web_Search_Agent\Web_Search_Agent.csproj", "{0309A3C8-A938-4C6F-9840-73E011299A6C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hello_World", "PocketFlowSharpSamples.Console\Hello_World\Hello_World.csproj", "{5BB76660-6CBE-43F6-90B8-B479B1EBB49C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,12 +25,17 @@ Global
 		{0309A3C8-A938-4C6F-9840-73E011299A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0309A3C8-A938-4C6F-9840-73E011299A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0309A3C8-A938-4C6F-9840-73E011299A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB76660-6CBE-43F6-90B8-B479B1EBB49C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB76660-6CBE-43F6-90B8-B479B1EBB49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB76660-6CBE-43F6-90B8-B479B1EBB49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB76660-6CBE-43F6-90B8-B479B1EBB49C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{0309A3C8-A938-4C6F-9840-73E011299A6C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{5BB76660-6CBE-43F6-90B8-B479B1EBB49C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD442CD0-9106-4522-A495-4A92FD91EDBA}

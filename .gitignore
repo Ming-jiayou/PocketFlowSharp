@@ -19,3 +19,4 @@ ASALocalRun/
 **/obj/
 **/.vs/
 /PocketFlowSharpSamples.Console/Web_Search_Agent/.env
+/PocketFlowSharpSamples.Console/Hello_World/.env
