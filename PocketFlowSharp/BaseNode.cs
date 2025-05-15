@@ -79,15 +79,9 @@ namespace PocketFlowSharp
             return _Run(shared);
         }
 
-        public static BaseNode operator -(BaseNode node, string action)
-        {
-            node.Next(node, action);
-            return node;
-        }
-
-        public static BaseNode operator +(BaseNode left, BaseNode right)
-        {
-            return left.Next(right);
+        public static ConditionalTransition operator -(BaseNode node, string action)
+        {          
+            return new ConditionalTransition(node,action);
         }       
     }
 }

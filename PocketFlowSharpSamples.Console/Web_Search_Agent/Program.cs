@@ -57,8 +57,8 @@ namespace Web_Search_Agent
             decide.Next(answer, "answer");
 
             // After SearchWeb completes and returns "decide", go back to DecideAction
-            search.Next(decide, "decide");
-            // _ = search - "decide" + decide;
+            // search.Next(decide, "decide");
+            _ = search - "decide" - decide;
 
             // Create the flow, starting with the DecideAction node
             var flow = new Flow(decide);
