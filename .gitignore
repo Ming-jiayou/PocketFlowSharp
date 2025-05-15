@@ -22,3 +22,4 @@ ASALocalRun/
 /PocketFlowSharpSamples.Console/Hello_World/.env
 /PocketFlowSharpSamples.Console/Chat/.env
 /PocketFlowSharpSamples.Console/Chat_Guardrail/.env
+/PocketFlowSharpSamples.Console/Summarize/.env
