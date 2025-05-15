@@ -21,3 +21,4 @@ ASALocalRun/
 /PocketFlowSharpSamples.Console/Web_Search_Agent/.env
 /PocketFlowSharpSamples.Console/Hello_World/.env
 /PocketFlowSharpSamples.Console/Chat/.env
+/PocketFlowSharpSamples.Console/Chat_Guardrail/.env

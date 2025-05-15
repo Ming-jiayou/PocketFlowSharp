@@ -42,7 +42,7 @@ namespace Chat
             var flow = new Flow(chatNode);
 
             // Add self-loop to continue the conversation
-            // _ = chatNode - "continue" + chatNode;
+            // _ = chatNode - "continue" - chatNode;
             chatNode.Next(chatNode, "continue");
 
             return flow;
