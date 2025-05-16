@@ -22,6 +22,18 @@ Human Evaluation 是一个基于 PocketFlowSharp 框架开发的人工评估系�
    - 用户可以选择接受或拒绝 AI 的回复
    - 如果拒绝，流程会返回到 AI 响应节点重新生成
 
+流程图：
+
+```mermaid
+graph TD
+    A[输入节点] -->|"generate"| B[AI回复节点]
+    B -->|"approve"| C[人工审核节点]
+    C -->|"approve"| D[结束节点]
+    C -->|"retry"| B
+```
+
+
+
 ## 使用流程
 
 1. **环境配置**
@@ -75,3 +87,12 @@ Human Evaluation 是一个基于 PocketFlowSharp 框架开发的人工评估系�
 - PocketFlowSharp 框架
 - OpenAI API
 - dotenv.net 
+
+## 运行效果
+
+![](https://mingupupup.oss-cn-wuhan-lr.aliyuncs.com/imgs/Human_Evaluation%E6%95%88%E6%9E%9C.gif)
+
+![image-20250516142423902](https://mingupupup.oss-cn-wuhan-lr.aliyuncs.com/imgs/image-20250516142423902.png)
+
+![image-20250516142438960](https://mingupupup.oss-cn-wuhan-lr.aliyuncs.com/imgs/image-20250516142438960.png)
+
