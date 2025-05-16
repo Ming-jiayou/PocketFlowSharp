@@ -6,7 +6,7 @@ namespace PocketFlowSharp
 {
     public class Flow : BaseNode
     {
-        private BaseNode _startNode;
+        protected BaseNode _startNode;
 
         public Flow(BaseNode startNode = null)
         {

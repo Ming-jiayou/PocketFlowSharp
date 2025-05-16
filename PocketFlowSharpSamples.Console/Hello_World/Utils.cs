@@ -27,7 +27,6 @@ namespace Hello_World
             ChatCompletion completion = client.CompleteChat(prompt);
 
             return completion.Content[0].Text;
-
         }
     }
 } 

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat_Guardrail", "PocketFlo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Summarize", "PocketFlowSharpSamples.Console\Summarize\Summarize.csproj", "{86BFDA5C-8CA9-4FF2-B836-D3F5938AC8D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Async_Basic", "PocketFlowSharpSamples.Console\Async_Basic\Async_Basic.csproj", "{475FD070-100D-4C16-A91A-D0180C41F2F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{86BFDA5C-8CA9-4FF2-B836-D3F5938AC8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{86BFDA5C-8CA9-4FF2-B836-D3F5938AC8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86BFDA5C-8CA9-4FF2-B836-D3F5938AC8D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{475FD070-100D-4C16-A91A-D0180C41F2F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{475FD070-100D-4C16-A91A-D0180C41F2F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{475FD070-100D-4C16-A91A-D0180C41F2F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{475FD070-100D-4C16-A91A-D0180C41F2F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -57,6 +63,7 @@ Global
 		{807A027B-E997-4396-93C0-991DA38DEE84} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{CB434E02-03DC-4495-8287-6E13CC18B003} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{86BFDA5C-8CA9-4FF2-B836-D3F5938AC8D8} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{475FD070-100D-4C16-A91A-D0180C41F2F2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD442CD0-9106-4522-A495-4A92FD91EDBA}

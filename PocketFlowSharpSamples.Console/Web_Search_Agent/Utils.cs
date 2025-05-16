@@ -30,7 +30,6 @@ namespace Web_Search_Agent
             ChatCompletion completion = client.CompleteChat(prompt);
 
             return completion.Content[0].Text;
-
         }
 
         public static string SearchWebSync(string query)
