@@ -23,3 +23,4 @@ ASALocalRun/
 /PocketFlowSharpSamples.Console/Chat/.env
 /PocketFlowSharpSamples.Console/Chat_Guardrail/.env
 /PocketFlowSharpSamples.Console/Summarize/.env
+/PocketFlowSharpSamples.Console/Human_Evaluation/.env

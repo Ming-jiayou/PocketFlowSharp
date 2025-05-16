@@ -65,12 +65,7 @@ namespace PocketFlowSharp
         }
 
         public object Run(Dictionary<string, object> shared)
-        {
-            if (_successors.Count > 0)
-            {
-                Console.WriteLine("Warning: Node won't run successors. Use Flow.");
-            }
-
+        {         
             return _Run(shared);
         }
 

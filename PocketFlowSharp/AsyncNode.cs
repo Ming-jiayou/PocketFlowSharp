@@ -67,11 +67,7 @@ namespace PocketFlowSharp
         }
 
         public async Task<object> RunAsync(Dictionary<string, object> shared)
-        {
-            //if (Successors.Count > 0)
-            //{
-            //    Console.WriteLine("Warning: Node won't run successors. Use AsyncFlow.");
-            //}
+        {          
             return await _RunAsync(shared);
         }
 

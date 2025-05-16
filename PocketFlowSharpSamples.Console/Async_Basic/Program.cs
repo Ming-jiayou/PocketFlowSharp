@@ -17,7 +17,7 @@ namespace Async_Basic
             Console.WriteLine("\nWelcome to Recipe Finder!");
             Console.WriteLine("------------------------");
             await recipeFlow.RunAsync(shared);
-            Console.WriteLine("\nThanks for using Recipe Finder!");
+            Console.WriteLine("\nThanks for using Recipe Finder!"); 
         }
 
         static AsyncFlow CreateFlow()
