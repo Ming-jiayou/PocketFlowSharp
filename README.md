@@ -11,6 +11,7 @@ Assist .NET developers in developing LLM applications.
 | [Chat_Guardrail](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Chat_Guardrail) | ☆☆☆ <br> *Dummy*  | A travel advisor chatbot that only processes travel-related queries. |
 | [Web_Search_Agent](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Web_Search_Agent) | ☆☆☆ <br> *Dummy*  | A research agent that can search the web and answer questions. |
 | [Human_Evaluation](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Human_Evaluation) | ☆☆☆ <br/> *Dummy* | A simple human review program.                               |
+| [LLM_Streaming](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/LLM_Streaming) | ☆☆☆ <br/> *Dummy* | A simple program for real-time output that can be canceled.  |
 
 ## Web Search Agent
 
@@ -23,3 +24,7 @@ Assist .NET developers in developing LLM applications.
 ![image-20250516142423902](https://mingupupup.oss-cn-wuhan-lr.aliyuncs.com/imgs/image-20250516142423902.png)
 
 ![image-20250516142438960](https://mingupupup.oss-cn-wuhan-lr.aliyuncs.com/imgs/image-20250516142438960.png)
+
+## LLM_Streaming
+
+![image-20250517145820140](https://mingupupup.oss-cn-wuhan-lr.aliyuncs.com/imgs/image-20250517145820140.png)
