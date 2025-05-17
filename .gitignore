@@ -24,3 +24,4 @@ ASALocalRun/
 /PocketFlowSharpSamples.Console/Chat_Guardrail/.env
 /PocketFlowSharpSamples.Console/Summarize/.env
 /PocketFlowSharpSamples.Console/Human_Evaluation/.env
+/PocketFlowSharpSamples.Console/LLM_Streaming/.env
