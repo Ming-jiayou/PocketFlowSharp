@@ -1,69 +1,74 @@
-# PocketFlowSharp Summarize Console Application
+# 文本摘要示例 (Text Summarization Example)
 
-## Overview
-This is a console application that uses the PocketFlowSharp framework to summarize text using a large language model (LLM).
+这是一个使用 PocketFlowSharp 框架实现的简单文本摘要应用示例。该示例展示了如何使用 PocketFlowSharp 框架构建一个基本的文本处理流程，将长文本转换为简短的摘要。
 
-## Purpose
-The purpose of this project is to demonstrate how PocketFlowSharp can be used to create a simple workflow for text summarization. It reads environment variables from a `.env` file, processes a given text, and outputs a summary.
+## 功能特点
 
-## Setup
-1. **Clone the Repository:**
-   ```sh
-	git clone https://github.com/your-repo/PocketFlowSharpSamples.Console.git
-	cd PocketFlowSharpSamples.Console/Summarize
-	```
+- 使用 LLM (大语言模型) 生成文本摘要
+- 简单的流程设计，展示 PocketFlowSharp 的基本用法
+- 包含错误处理和回退机制
+- 支持环境变量配置
 
-2. **Install Dependencies:**
-   ```sh
-	dotnet restore
-	```
+## 项目结构
 
-3. **Configure Environment Variables:**
-   - Copy the `.env.example` file to `.env`:
-     ```sh
-	   copy .env.example .env
-	 ```
-   - Edit the `.env` file to include your API keys and endpoint:
-     ```ini
-	 ModelName=Qwen/Qwen2.5-72B-Instruct
-	 EndPoint=https://api.siliconflow.cn/v1
-	 ApiKey=sk-xxx
-	 BraveSearchApiKey=BSA9xxx
-	 ```
-
-## Usage
-**Run the Application:**
-
-```sh
-dotnet run
+```
+Summarize/
+├── Program.cs          # 主程序入口
+├── SummarizeNode.cs    # 摘要节点实现
+├── Utils.cs            # 工具类
+└── Summarize.csproj    # 项目文件
 ```
 
-**Example Output:**
+## 使用方法
 
-The application will output the input text and its summary:
+1. 首先确保你已经安装了 .NET SDK
 
-```sh
- 输入文本:
- PocketFlow is a minimalist LLM framework that models workflows as a Nested Directed Graph.
- Nodes handle simple LLM tasks, connecting through Actions for Agents.
- Flows orchestrate these nodes for Task Decomposition, and can be nested.
- It also supports Batch processing and Async execution.
+2. 在项目根目录创建 `.env` 文件，并配置以下环境变量：
+   ```
+   ModelName=你的模型名称
+   EndPoint=API端点地址
+   ApiKey=你的API密钥
+   ```
+
+3. 运行程序：
+   ```bash
+   dotnet run
+   ```
+
+## 代码示例
+
+这是一个基本的使用示例：
+
+```csharp
+// 创建共享数据字典
+var shared = new Dictionary<string, object>();
+
+// 设置要摘要的文本
+shared["data"] = "你的长文本...";
+
+// 创建并运行摘要流程
+var summarizeFlow = CreateFlow();
+summarizeFlow.Run(shared);
+
+// 获取摘要结果
+string summary = (string)shared["summary"];
 ```
 
-```sh
- 摘要:
- PocketFlow: Minimalist LLM framework for task decomposition.
-```
+## 注意事项
 
-## Project Structure
+- 确保正确配置环境变量
+- API密钥请妥善保管，不要提交到版本控制系统
+- 建议在使用前测试API连接是否正常
 
-- **.env:** Contains environment variables for the application.
-- **.env.example:** Example file for environment variables.
-- **Program.cs:** Main entry point of the application.
-- **SummarizeNode.cs:** Node class that handles the summarization task.
-- **Utils.cs:** Utility functions for interacting with the LLM.
-- **Summarize.csproj:** Project configuration file.
+## 依赖项
 
-## Dependencies
-- **dotenv.net:** For loading environment variables.
-- **Microsoft.Extensions.AI.OpenAI:** For interacting with the LLM API.
+- PocketFlowSharp
+- dotenv.net
+
+## 贡献
+
+欢迎提交 Issue 和 Pull Request 来帮助改进这个示例项目。
+
+## 许可证
+
+MIT License 
