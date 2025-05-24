@@ -13,17 +13,25 @@ namespace PocketFlowSharp
 
         public override object Exec(object prepResult)
         {
+            // Handle null case
             if (prepResult == null)
             {
                 return new List<object>();
             }
 
+            // If the input is already a list, process each item
             if (prepResult is IEnumerable<object> items)
             {
-                return items.Select(item => base.Exec(item)).ToList();
+                return items.Select(item => ProcessSingleItem(item)).ToList();
             }
 
-            throw new ArgumentException("BatchNode expects an IEnumerable<object> as input");
+            // If it's a single item, process it directly
+            return ProcessSingleItem(prepResult);
+        }
+
+        private object ProcessSingleItem(object item)
+        {
+            return ((Node)this).Exec(item);
         }
     }
 } 
