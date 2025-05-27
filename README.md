@@ -12,6 +12,7 @@ Assist .NET developers in developing LLM applications.
 | [Web_Search_Agent](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Web_Search_Agent) | ☆☆☆ <br> *Dummy*  | A research agent that can search the web and answer questions. |
 | [Human_Evaluation](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Human_Evaluation) | ☆☆☆ <br/> *Dummy* | A simple human review program.                               |
 | [LLM_Streaming](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/LLM_Streaming) | ☆☆☆ <br/> *Dummy* | A simple program for real-time output that can be canceled.  |
+| [BatchNode_Demo](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/BatchNode_Demo) | ☆☆☆ <br/> *Dummy* | A simple example using BatchNode.                            |
 
 ## Web Search Agent
 
