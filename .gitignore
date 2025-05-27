@@ -18,10 +18,4 @@ ASALocalRun/
 **/bin/
 **/obj/
 **/.vs/
-/PocketFlowSharpSamples.Console/Web_Search_Agent/.env
-/PocketFlowSharpSamples.Console/Hello_World/.env
-/PocketFlowSharpSamples.Console/Chat/.env
-/PocketFlowSharpSamples.Console/Chat_Guardrail/.env
-/PocketFlowSharpSamples.Console/Summarize/.env
-/PocketFlowSharpSamples.Console/Human_Evaluation/.env
-/PocketFlowSharpSamples.Console/LLM_Streaming/.env
+*.env

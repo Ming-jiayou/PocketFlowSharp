@@ -25,6 +25,11 @@ namespace PocketFlowSharp
                 return items.Select(item => ProcessSingleItem(item)).ToList();
             }
 
+            if (prepResult is IEnumerable<KeyValuePair<string,string>> items2)
+            {
+                return items2.Select(item => ProcessSingleItem(item)).ToList();
+            }
+
             // If it's a single item, process it directly
             return ProcessSingleItem(prepResult);
         }
