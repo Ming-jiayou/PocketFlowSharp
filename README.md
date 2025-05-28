@@ -30,3 +30,15 @@ Assist .NET developers in developing LLM applications.
 ## LLM_Streaming
 
 ![image-20250517145820140](https://mingupupup.oss-cn-wuhan-lr.aliyuncs.com/imgs/image-20250517145820140.png)
+
+## 一些随笔
+
+[“Pocket Flow，一个仅用 100 行代码实现的 LLM 框架”](https://mp.weixin.qq.com/s/DBqJ4NIEkWiz5gxG8wz0RQ)
+
+[使用PocketFlow构建Web Search Agent](https://mp.weixin.qq.com/s/IBeUUbgpHAL2K-r5aQ49mA)
+
+[手把手教你使用C#创建一个WebSearchAgent](https://mp.weixin.qq.com/s/BvtclBasoLinAHRnWw4xNA)
+
+[使用PocketFlowSharp创建一个Human_Evaluation示例](https://mp.weixin.qq.com/s/1G2dipaqL157reKehHXgow)
+
+[C#学习：基于LLM的简历评估程序](https://mp.weixin.qq.com/s/-z_eBIxvSGCo6iw8HREWqA)
