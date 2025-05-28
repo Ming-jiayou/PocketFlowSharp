@@ -5,14 +5,15 @@ Assist .NET developers in developing LLM applications.
 
 |                             Name                             |    Difficulty     | Description                                                  |
 | :----------------------------------------------------------: | :---------------: | :----------------------------------------------------------- |
-| [Hello_World](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Hello_World) | ☆☆☆ <br> *Dummy*  | Getting started program.                                     |
-| [Summarize](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Summarize) | ☆☆☆ <br> *Dummy*  | A basic summary program.                                     |
-| [Chat](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Chat) | ☆☆☆ <br> *Dummy*  | A basic chat bot with conversation history.                  |
-| [Chat_Guardrail](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Chat_Guardrail) | ☆☆☆ <br> *Dummy*  | A travel advisor chatbot that only processes travel-related queries. |
-| [Web_Search_Agent](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Web_Search_Agent) | ☆☆☆ <br> *Dummy*  | A research agent that can search the web and answer questions. |
-| [Human_Evaluation](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Human_Evaluation) | ☆☆☆ <br/> *Dummy* | A simple human review program.                               |
-| [LLM_Streaming](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/LLM_Streaming) | ☆☆☆ <br/> *Dummy* | A simple program for real-time output that can be canceled.  |
-| [BatchNode_Demo](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/BatchNode_Demo) | ☆☆☆ <br/> *Dummy* | A simple example using BatchNode.                            |
+| [Hello_World](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Hello_World) | ☆☆☆ <br> *Dummy*  | Getting started program                                      |
+| [Summarize](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Summarize) | ☆☆☆ <br> *Dummy*  | A basic summary program                                      |
+| [Chat](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Chat) | ☆☆☆ <br> *Dummy*  | A basic chat bot with conversation history                   |
+| [Chat_Guardrail](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Chat_Guardrail) | ☆☆☆ <br> *Dummy*  | A travel advisor chatbot that only processes travel-related queries |
+| [Web_Search_Agent](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Web_Search_Agent) | ☆☆☆ <br> *Dummy*  | A research agent that can search the web and answer questions |
+| [Human_Evaluation](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Human_Evaluation) | ☆☆☆ <br/> *Dummy* | A simple human review program                                |
+| [LLM_Streaming](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/LLM_Streaming) | ☆☆☆ <br/> *Dummy* | A simple program for real-time output that can be canceled   |
+| [BatchNode_Demo](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/BatchNode_Demo) | ☆☆☆ <br/> *Dummy* | A simple example using BatchNode                             |
+| [Resume_Qualification_Demo](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Resume_Qualification_Demo) | ☆☆☆ <br/> *Dummy* | A simple resume evaluation program built using PocketFlowSharp |
 
 ## Web Search Agent
 
