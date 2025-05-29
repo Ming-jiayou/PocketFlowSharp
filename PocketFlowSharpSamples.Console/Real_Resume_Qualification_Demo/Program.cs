@@ -29,8 +29,8 @@ namespace Real_Resume_Qualification_Demo
             // 初始化共享存储
             var shared = new Dictionary<string, object>();
             shared["requirements"] = """
-                - 具备前端开发能力
-                - 使用过Vue
+                - 具备后端开发能力
+                - 熟悉go语言
                 """;
 
             // 运行流程

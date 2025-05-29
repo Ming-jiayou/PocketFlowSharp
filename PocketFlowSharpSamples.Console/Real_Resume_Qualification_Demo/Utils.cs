@@ -18,7 +18,6 @@ namespace Real_Resume_Qualification_Demo
         public static string ModelName { get; set; }
         public static string EndPoint { get; set; }
         public static string ApiKey { get; set; }
-        public static string BraveSearchApiKey { get; set; }
 
         public static string CallLLM(string prompt)
         {
