@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BatchNode_Demo", "PocketFlo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resume_Qualification_Demo", "PocketFlowSharpSamples.Console\Resume_Qualification_Demo\Resume_Qualification_Demo.csproj", "{92F27587-C4C6-47F4-8B3D-E6C6B4DCBBCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Real_Resume_Qualification_Demo", "PocketFlowSharpSamples.Console\Real_Resume_Qualification_Demo\Real_Resume_Qualification_Demo.csproj", "{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{92F27587-C4C6-47F4-8B3D-E6C6B4DCBBCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92F27587-C4C6-47F4-8B3D-E6C6B4DCBBCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92F27587-C4C6-47F4-8B3D-E6C6B4DCBBCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +98,7 @@ Global
 		{7B4FDEAD-F73A-46F0-8C8F-717A6F204226} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{1B030B8D-E837-4A2D-9072-19B12F6B6E47} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{92F27587-C4C6-47F4-8B3D-E6C6B4DCBBCF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD442CD0-9106-4522-A495-4A92FD91EDBA}
