@@ -13,7 +13,8 @@ Assist .NET developers in developing LLM applications.
 | [Human_Evaluation](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Human_Evaluation) | ☆☆☆ <br/> *Dummy* | A simple human review program                                |
 | [LLM_Streaming](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/LLM_Streaming) | ☆☆☆ <br/> *Dummy* | A simple program for real-time output that can be canceled   |
 | [BatchNode_Demo](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/BatchNode_Demo) | ☆☆☆ <br/> *Dummy* | A simple example using BatchNode                             |
-| [Resume_Qualification_Demo](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Resume_Qualification_Demo) | ☆☆☆ <br/> *Dummy* | A simple resume evaluation program built using PocketFlowSharp |
+| [Resume_Qualification_Demo](https://github.com/Ming-jiayou/PocketFlowSharp/tree/main/PocketFlowSharpSamples.Console/Resume_Qualification_Demo) | ☆☆☆ <br/> *Dummy* | A simple resume evaluation program                           |
+|               Real_Resume_Qualification_Demo()               | ☆☆☆ <br/> *Dummy* | a more realistic resume evaluation program                   |
 
 ## Web Search Agent
 
@@ -42,3 +43,5 @@ Assist .NET developers in developing LLM applications.
 [使用PocketFlowSharp创建一个Human_Evaluation示例](https://mp.weixin.qq.com/s/1G2dipaqL157reKehHXgow)
 
 [C#学习：基于LLM的简历评估程序](https://mp.weixin.qq.com/s/-z_eBIxvSGCo6iw8HREWqA)
+
+[C#学习：构建一个更真实的基于LLM的简历评估系统](https://mp.weixin.qq.com/s/cOoQwdRExyoRgEzQBlhzZA)
