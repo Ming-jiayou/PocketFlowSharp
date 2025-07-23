@@ -29,6 +29,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resume_Qualification_Demo",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Real_Resume_Qualification_Demo", "PocketFlowSharpSamples.Console\Real_Resume_Qualification_Demo\Real_Resume_Qualification_Demo.csproj", "{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PocketFlowSharpSamples.WPF", "PocketFlowSharpSamples.WPF", "{C2CA23E1-47A8-48C2-BD4B-2A7A6CD6482A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PocketFlowSharpGallery", "PocketFlowSharpSamples.WPF\PocketFlowSharpGallery\PocketFlowSharpGallery.csproj", "{B6338F56-C20C-458F-B468-57C0D0EB6682}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,10 @@ Global
 		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6338F56-C20C-458F-B468-57C0D0EB6682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6338F56-C20C-458F-B468-57C0D0EB6682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6338F56-C20C-458F-B468-57C0D0EB6682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6338F56-C20C-458F-B468-57C0D0EB6682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +107,7 @@ Global
 		{1B030B8D-E837-4A2D-9072-19B12F6B6E47} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{92F27587-C4C6-47F4-8B3D-E6C6B4DCBBCF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{0838410D-9353-4D1B-8CE7-81BDD14B8FF5} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{B6338F56-C20C-458F-B468-57C0D0EB6682} = {C2CA23E1-47A8-48C2-BD4B-2A7A6CD6482A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AD442CD0-9106-4522-A495-4A92FD91EDBA}
