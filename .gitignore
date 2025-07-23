@@ -19,3 +19,4 @@ ASALocalRun/
 **/obj/
 **/.vs/
 *.env
+**.db

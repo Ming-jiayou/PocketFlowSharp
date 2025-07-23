@@ -52,6 +52,8 @@ namespace PocketFlowSharpGallery
                 services.AddSingleton<DataViewModel>();
                 services.AddSingleton<SettingsPage>();
                 services.AddSingleton<SettingsViewModel>();
+                services.AddSingleton<LLMConfigPage>();
+                services.AddSingleton<LLMConfigViewModel>();
             }).Build();
 
         /// <summary>

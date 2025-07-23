@@ -22,6 +22,12 @@ namespace PocketFlowSharpGallery.ViewModels.Windows
                 Content = "Data",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.DataPage)
+            },
+             new NavigationViewItem()
+            {
+                Content = "LLM Config",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
+                TargetPageType = typeof(Views.Pages.LLMConfigPage)
             }
         };
 
