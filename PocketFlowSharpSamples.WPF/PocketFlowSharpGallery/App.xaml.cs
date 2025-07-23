@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PocketFlowSharpGallery.Services;
@@ -6,6 +7,7 @@ using PocketFlowSharpGallery.ViewModels.Pages;
 using PocketFlowSharpGallery.ViewModels.Windows;
 using PocketFlowSharpGallery.Views.Pages;
 using PocketFlowSharpGallery.Views.Windows;
+using PocketFlowSharpGallery.Data;
 using System.IO;
 using System.Reflection;
 using System.Windows.Threading;
@@ -29,6 +31,15 @@ namespace PocketFlowSharpGallery
             .ConfigureAppConfiguration(c => { c.SetBasePath(Path.GetDirectoryName(AppContext.BaseDirectory)); })
             .ConfigureServices((context, services) =>
             {
+
+                // 添加数据库服务
+                var projectRootPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "..");
+                projectRootPath = Path.GetFullPath(projectRootPath);
+                var dbPath = Path.Combine(projectRootPath, "Data", "pocketflowcharp.db");
+
+                services.AddDbContext<PFSDbContext>(options =>
+                    options.UseSqlite($"Data Source={dbPath}"));
+
                 services.AddNavigationViewPageProvider();
 
                 services.AddHostedService<ApplicationHostService>();
