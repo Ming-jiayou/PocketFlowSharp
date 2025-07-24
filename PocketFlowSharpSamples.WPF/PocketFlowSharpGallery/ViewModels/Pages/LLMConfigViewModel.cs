@@ -4,6 +4,7 @@ using PocketFlowSharpGallery.Models;
 using PocketFlowSharpGallery.Services;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PocketFlowSharpGallery.ViewModels.Pages
@@ -23,6 +24,9 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
 
         [ObservableProperty]
         private bool _isNewConfig = true;
+
+        [ObservableProperty]
+        private int _selectedTabIndex = 0;
 
         public LLMConfigViewModel(ILLMConfigRepository repository)
         {
@@ -51,14 +55,17 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
             if (IsNewConfig)
             {
                 await _repository.AddAsync(Config);
+                MessageBox.Show("LLM配置已成功添加！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
                 await _repository.UpdateAsync(Config);
+                MessageBox.Show("LLM配置已成功更新！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
             }
 
             await LoadConfigsAsync();
             Cancel();
+            SelectedTabIndex = 1; // 切换到Query Tab
         }
 
         [RelayCommand]
@@ -84,9 +91,9 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         }
 
         [RelayCommand]
-        private async Task EditItemAsync(LLMConfig config)
+        private async Task EditItem(object parameter)
         {
-            if (config != null)
+            if (parameter is LLMConfig config && config != null)
             {
                 Config = new LLMConfig
                 {
@@ -98,13 +105,14 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
                 };
                 IsNewConfig = false;
                 IsEditing = true;
+                SelectedTabIndex = 0; // 切换到Edit Tab
             }
         }
 
         [RelayCommand]
-        private async Task DeleteItemAsync(LLMConfig config)
+        private async Task DeleteItem(object parameter)
         {
-            if (config != null)
+            if (parameter is LLMConfig config && config != null)
             {
                 await _repository.DeleteAsync(config.Id);
                 await LoadConfigsAsync();

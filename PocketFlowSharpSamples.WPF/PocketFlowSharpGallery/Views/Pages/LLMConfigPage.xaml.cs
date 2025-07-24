@@ -20,7 +20,7 @@ namespace PocketFlowSharpGallery.Views.Pages
 
         private async void LLMConfigPage_OnLoaded(object sender, RoutedEventArgs e)
         {
-            await _viewModel.LoadConfigsCommand.ExecuteAsync(null);
+            await _viewModel.InitializeAsync();
         }
     }
 }
