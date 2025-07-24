@@ -84,9 +84,9 @@
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <Button Content="Edit" Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                            <Button Content="Edit" Command="{Binding DataContext.EditItemAsyncCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                     CommandParameter="{Binding}" Margin="2"/>
-                                            <Button Content="Delete" Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                                            <Button Content="Delete" Command="{Binding DataContext.DeleteItemAsyncCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                                     CommandParameter="{Binding}" Margin="2"/>
                                         </StackPanel>
                                     </DataTemplate>
