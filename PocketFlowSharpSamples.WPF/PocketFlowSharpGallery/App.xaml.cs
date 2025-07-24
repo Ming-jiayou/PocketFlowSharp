@@ -65,6 +65,9 @@ namespace PocketFlowSharpGallery
                 services.AddSingleton<SettingsViewModel>();
                 services.AddSingleton<LLMConfigPage>();
                 services.AddSingleton<LLMConfigViewModel>();
+                
+                // Register LLMConfig repository
+                services.AddScoped<ILLMConfigRepository, LLMConfigRepository>();
             }).Build();
 
         /// <summary>

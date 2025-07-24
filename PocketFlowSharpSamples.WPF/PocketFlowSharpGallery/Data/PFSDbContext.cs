@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PocketFlowSharpGallery.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,20 @@ namespace PocketFlowSharpGallery.Data
         public PFSDbContext(DbContextOptions<PFSDbContext> options)
             : base(options)
         {
-        }     
+        }
+
+        public DbSet<LLMConfig> LLMConfigs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            
+            modelBuilder.Entity<LLMConfig>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Provider).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.EndPoint).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.ModelName).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.ApiKey).IsRequired().HasMaxLength(1000);
+            });
         }
     }
 }

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PocketFlowSharpGallery.ViewModels.Pages;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PocketFlowSharpGallery.Views.Pages
 {
@@ -20,9 +9,18 @@ namespace PocketFlowSharpGallery.Views.Pages
     /// </summary>
     public partial class LLMConfigPage : Page
     {
-        public LLMConfigPage()
+        private readonly LLMConfigViewModel _viewModel;
+
+        public LLMConfigPage(LLMConfigViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
+            _viewModel = viewModel;
+        }
+
+        private async void LLMConfigPage_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            await _viewModel.LoadConfigsCommand.ExecuteAsync(null);
         }
     }
 }
