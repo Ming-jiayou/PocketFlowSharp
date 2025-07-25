@@ -92,7 +92,7 @@
                         <Button Content="Refresh" Command="{Binding RefreshCommand}" Margin="5"/>
                     </StackPanel>
 
-                    <DataGrid Grid.Row="1" ItemsSource="{Binding Configs}" AutoGenerateColumns="False" Margin="5">
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding Configs}" AutoGenerateColumns="False" Margin="5" CanUserAddRows="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
                             <DataGridTextColumn Header="Provider" Binding="{Binding Provider}" Width="*"/>
