@@ -55,20 +55,52 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         [RelayCommand]
         private async Task SaveAsync()
         {
-            if (IsNewConfig)
+            // 验证必填字段
+            if (string.IsNullOrWhiteSpace(Config.Provider))
             {
-                await _repository.AddAsync(Config);
-                MessageBox.Show("LLM配置已成功添加！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else
-            {
-                await _repository.UpdateAsync(Config);
-                MessageBox.Show("LLM配置已成功更新！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("请填写提供商名称！", "验证错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
             }
 
-            await LoadConfigsAsync();
-            Cancel();
-            SelectedTabIndex = 1; // 切换到Query Tab
+            if (string.IsNullOrWhiteSpace(Config.EndPoint))
+            {
+                MessageBox.Show("请填写API端点地址！", "验证错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Config.ModelName))
+            {
+                MessageBox.Show("请填写模型名称！", "验证错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Config.ApiKey))
+            {
+                MessageBox.Show("请填写API密钥！", "验证错误", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            try
+            {
+                if (IsNewConfig)
+                {
+                    await _repository.AddAsync(Config);
+                    MessageBox.Show("LLM配置已成功添加！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else
+                {
+                    await _repository.UpdateAsync(Config);
+                    MessageBox.Show("LLM配置已成功更新！", "成功", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+
+                await LoadConfigsAsync();
+                Cancel();
+                SelectedTabIndex = 1; // 切换到Query Tab
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"保存配置时发生错误：{ex.Message}", "错误", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         [RelayCommand]
@@ -98,6 +130,22 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         {
             if (parameter is LLMConfig config && config != null)
             {
+                // 检查要编辑的配置是否完整
+                if (string.IsNullOrWhiteSpace(config.Provider) || 
+                    string.IsNullOrWhiteSpace(config.EndPoint) || 
+                    string.IsNullOrWhiteSpace(config.ModelName) || 
+                    string.IsNullOrWhiteSpace(config.ApiKey))
+                {
+                    var result = MessageBox.Show(
+                        "此配置缺少一些信息，继续编辑可能会导致问题。\n\n是否要继续编辑？", 
+                        "配置不完整",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Warning);
+                    
+                    if (result != MessageBoxResult.Yes)
+                        return;
+                }
+
                 Config = new LLMConfig
                 {
                     Id = config.Id,
