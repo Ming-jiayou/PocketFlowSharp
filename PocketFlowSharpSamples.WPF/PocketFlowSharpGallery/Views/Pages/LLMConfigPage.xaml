@@ -80,6 +80,7 @@
                             <DataGridTextColumn Header="Provider" Binding="{Binding Provider}" Width="*"/>
                             <DataGridTextColumn Header="Endpoint" Binding="{Binding EndPoint}" Width="*"/>
                             <DataGridTextColumn Header="Model Name" Binding="{Binding ModelName}" Width="*"/>
+                            <DataGridTextColumn Header="API Key" Binding="{Binding ApiKey}" Width="*"/>
                             <DataGridTemplateColumn Header="Actions" Width="100">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
