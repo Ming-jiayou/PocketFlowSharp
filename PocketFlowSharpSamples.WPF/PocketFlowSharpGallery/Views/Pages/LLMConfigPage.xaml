@@ -81,14 +81,14 @@
                             <DataGridTextColumn Header="Endpoint" Binding="{Binding EndPoint}" Width="*"/>
                             <DataGridTextColumn Header="Model Name" Binding="{Binding ModelName}" Width="*"/>
                             <DataGridTextColumn Header="API Key" Binding="{Binding ApiKey}" Width="*"/>
-                            <DataGridTemplateColumn Header="Actions" Width="100">
+                            <DataGridTemplateColumn Header="Actions" Width="SizeToCells">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                             <Button Content="Edit" Command="{Binding DataContext.EditItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                    CommandParameter="{Binding .}" Margin="2"/>
+                                                    CommandParameter="{Binding .}" Margin="2" Padding="5,2"/>
                                             <Button Content="Delete" Command="{Binding DataContext.DeleteItemCommand, RelativeSource={RelativeSource AncestorType=Page}}"
-                                                    CommandParameter="{Binding .}" Margin="2"/>
+                                                    CommandParameter="{Binding .}" Margin="2" Padding="5,2"/>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
