@@ -27,6 +27,9 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
 
         [ObservableProperty]
         private int _selectedTabIndex = 0;
+        
+        [ObservableProperty]
+        private bool _isApiKeyVisible = false;
 
         public LLMConfigViewModel(ILLMConfigRepository repository)
         {
@@ -123,6 +126,12 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         private async Task RefreshAsync()
         {
             await LoadConfigsAsync();
+        }
+        
+        [RelayCommand]
+        private void ToggleApiKeyVisibility()
+        {
+            IsApiKeyVisible = !IsApiKeyVisible;
         }
     }
 }

@@ -11,6 +11,12 @@
       Title="LLMConfigPage"
       Loaded="LLMConfigPage_OnLoaded">
 
+    <Page.Resources>
+        <helpers:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
+        <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <helpers:ApiKeyMaskConverter x:Key="ApiKeyMaskConverter"/>
+    </Page.Resources>
+    
     <Grid Margin="10">
         <TabControl SelectedIndex="{Binding SelectedTabIndex}">
             <TabItem Header="Edit">
@@ -29,27 +35,39 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="Provider:" VerticalAlignment="Center" Margin="5"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Config.Provider, UpdateSourceTrigger=PropertyChanged}" 
+                    <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Config.Provider, UpdateSourceTrigger=PropertyChanged}"
                              IsEnabled="{Binding IsEditing}" Margin="5"/>
 
                     <TextBlock Grid.Row="1" Grid.Column="0" Text="Endpoint:" VerticalAlignment="Center" Margin="5"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Config.EndPoint, UpdateSourceTrigger=PropertyChanged}" 
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Config.EndPoint, UpdateSourceTrigger=PropertyChanged}"
                              IsEnabled="{Binding IsEditing}" Margin="5"/>
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="Model Name:" VerticalAlignment="Center" Margin="5"/>
-                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Config.ModelName, UpdateSourceTrigger=PropertyChanged}" 
+                    <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Config.ModelName, UpdateSourceTrigger=PropertyChanged}"
                              IsEnabled="{Binding IsEditing}" Margin="5"/>
 
                     <TextBlock Grid.Row="3" Grid.Column="0" Text="API Key:" VerticalAlignment="Center" Margin="5"/>
-                    <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding Config.ApiKey, UpdateSourceTrigger=PropertyChanged}" 
-                             IsEnabled="{Binding IsEditing}" Margin="5"/>
+                    <Grid Grid.Row="3" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <PasswordBox Grid.Column="0" x:Name="ApiKeyPasswordBox"
+                                     helpers:PasswordBoxHelper.Attach="True"
+                                     helpers:PasswordBoxHelper.Password="{Binding Config.ApiKey, UpdateSourceTrigger=PropertyChanged}"
+                                     IsEnabled="{Binding IsEditing}" Margin="5,5,0,5"
+                                     Visibility="{Binding IsApiKeyVisible, Converter={StaticResource InverseBoolToVisibilityConverter}}"/>
+                        <TextBox Grid.Column="0" Text="{Binding Config.ApiKey, UpdateSourceTrigger=PropertyChanged}"
+                                 IsEnabled="{Binding IsEditing}" Margin="5,5,0,5"
+                                 Visibility="{Binding IsApiKeyVisible, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                        <Button Grid.Column="1" Command="{Binding ToggleApiKeyVisibilityCommand}"
+                                Content="👁" ToolTip="显示/隐藏API密钥"
+                                Width="30" Height="25" Margin="0,5,5,5" Padding="0"
+                                IsEnabled="{Binding IsEditing}"/>
+                    </Grid>
 
                     <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                                 Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-                        <StackPanel.Resources>
-                            <helpers:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter"/>
-                            <helpers:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
-                        </StackPanel.Resources>
                         <Button Content="Edit" Command="{Binding EditCommand}"
                                 Visibility="{Binding IsEditing, Converter={StaticResource InverseBoolToVisibilityConverter}}"
                                 Margin="5"/>
@@ -80,7 +98,13 @@
                             <DataGridTextColumn Header="Provider" Binding="{Binding Provider}" Width="*"/>
                             <DataGridTextColumn Header="Endpoint" Binding="{Binding EndPoint}" Width="*"/>
                             <DataGridTextColumn Header="Model Name" Binding="{Binding ModelName}" Width="*"/>
-                            <DataGridTextColumn Header="API Key" Binding="{Binding ApiKey}" Width="*"/>
+                            <DataGridTemplateColumn Header="API Key" Width="*">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding ApiKey, Converter={StaticResource ApiKeyMaskConverter}}" ToolTip="点击显示完整API密钥 (右击显示菜单)"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn Header="Actions" Width="SizeToCells">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
