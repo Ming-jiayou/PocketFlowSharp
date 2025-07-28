@@ -1,6 +1,6 @@
 using PocketFlowSharp;
 
-namespace PocketFlowSharpGallery.WebSearchAgent
+namespace PocketFlowSharpGallery.Models.WebSearchAgent
 {
     public class DecideActionNode : Node
     {

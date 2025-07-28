@@ -24,10 +24,6 @@
 
         <!-- Header -->
         <StackPanel Grid.Row="0" Margin="0,0,0,20">
-            <TextBlock Text="Web Search Agent" 
-                       FontSize="24" 
-                       FontWeight="Bold"
-                       Margin="0,0,0,10"/>
             <TextBlock Text="Ask any question and let the AI search the web for answers" 
                        FontSize="14" 
                        Foreground="Gray"/>

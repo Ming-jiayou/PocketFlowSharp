@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PocketFlowSharp;
-using PocketFlowSharpGallery.WebSearchAgent;
+using PocketFlowSharpGallery.Models.WebSearchAgent;
 using System.Collections.ObjectModel;
 
 namespace PocketFlowSharpGallery.ViewModels.Pages
@@ -143,8 +143,6 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
 
         private void LoadConfiguration()
         {
-            // Load from app settings or provide defaults
-            // For now, provide some example values
             ModelName = "gpt-3.5-turbo";
             EndPoint = "https://api.openai.com/v1";
             ApiKey = "your-openai-api-key";

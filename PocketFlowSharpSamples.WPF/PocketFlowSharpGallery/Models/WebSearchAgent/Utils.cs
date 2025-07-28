@@ -6,7 +6,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
-namespace PocketFlowSharpGallery.WebSearchAgent
+namespace PocketFlowSharpGallery.Models.WebSearchAgent
 {
     public static class Utils
     {

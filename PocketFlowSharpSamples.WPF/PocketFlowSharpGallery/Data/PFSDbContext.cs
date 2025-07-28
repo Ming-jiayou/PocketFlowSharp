@@ -16,6 +16,7 @@ namespace PocketFlowSharpGallery.Data
         }
 
         public DbSet<LLMConfig> LLMConfigs { get; set; }
+        public DbSet<SearchEngineConfig> SearchEngineConfigs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -26,6 +27,15 @@ namespace PocketFlowSharpGallery.Data
                 entity.Property(e => e.EndPoint).IsRequired().HasMaxLength(500);
                 entity.Property(e => e.ModelName).IsRequired().HasMaxLength(200);
                 entity.Property(e => e.ApiKey).IsRequired().HasMaxLength(1000);
+            });
+
+            modelBuilder.Entity<SearchEngineConfig>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Provider).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.EndPoint).IsRequired().HasMaxLength(500);
+                entity.Property(e => e.ApiKey).IsRequired().HasMaxLength(1000);
+                entity.Property(e => e.Description).HasMaxLength(500);
             });
         }
     }

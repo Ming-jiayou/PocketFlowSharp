@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Wpf.Ui.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace PocketFlowSharpGallery.ViewModels.Windows
 {
@@ -28,6 +29,12 @@ namespace PocketFlowSharpGallery.ViewModels.Windows
                 Content = "LLM Config",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.LLMConfigPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Search Engine Config",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Settings24 },
+                TargetPageType = typeof(Views.Pages.SearchEngineConfigPage)
             },
             new NavigationViewItem()
             {
