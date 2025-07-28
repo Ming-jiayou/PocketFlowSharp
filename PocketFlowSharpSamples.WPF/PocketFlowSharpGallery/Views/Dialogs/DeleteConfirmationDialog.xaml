@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
         mc:Ignorable="d"
-        Title="确认删除"
+        Title="{Binding Title}"
         Width="400"
         Height="200"
         ResizeMode="NoResize"
@@ -31,38 +31,40 @@
         <!-- 标题和图标 -->
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
             <ui:SymbolIcon Symbol="Warning24" Foreground="{DynamicResource SystemFillColorCautionBrush}" FontSize="24" Margin="0,0,10,0"/>
-            <TextBlock Text="确认删除" 
-                       Style="{StaticResource BodyStrongTextBlockStyle}" 
+            <TextBlock Text="{Binding Title}"
+                       Style="{StaticResource BodyStrongTextBlockStyle}"
                        FontSize="18"
                        VerticalAlignment="Center"/>
         </StackPanel>
         
         <!-- 警告文本 -->
-        <TextBlock Grid.Row="1" 
+        <TextBlock Grid.Row="1"
                    TextWrapping="Wrap"
                    Style="{StaticResource BodyTextBlockStyle}">
-            <Run Text="您确定要删除配置"/>
+            <Run Text="您确定要删除"/>
             <Run Text=" "/>
-            <Run Text="{Binding ConfigName}" FontWeight="SemiBold"/>
+            <Run Text="{Binding ItemType}" FontWeight="SemiBold"/>
+            <Run Text=" "/>
+            <Run Text="{Binding ItemName}" FontWeight="SemiBold"/>
             <Run Text=" "/>
             <Run Text="吗？"/>
             <LineBreak/>
-            <Run Text="此操作不可撤销，删除后配置将无法恢复。" Foreground="{DynamicResource SystemFillColorCriticalBrush}"/>
+            <Run Text="{Binding WarningMessage}" Foreground="{DynamicResource SystemFillColorCriticalBrush}"/>
         </TextBlock>
         
         <!-- 按钮区域 -->
-        <StackPanel Grid.Row="2" 
-                    Orientation="Horizontal" 
-                    HorizontalAlignment="Right" 
+        <StackPanel Grid.Row="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
                     Margin="0,20,0,0">
             <ui:Button x:Name="CancelButton"
-                       Content="取消"
+                       Content="{Binding CancelButtonText}"
                        Margin="0,0,10,0"
                        Width="80"
                        IsCancel="True"
                        Command="{Binding CancelCommand}"/>
             <ui:Button x:Name="ConfirmButton"
-                       Content="删除"
+                       Content="{Binding ConfirmButtonText}"
                        Width="80"
                        IsDefault="True"
                        Command="{Binding ConfirmCommand}"/>

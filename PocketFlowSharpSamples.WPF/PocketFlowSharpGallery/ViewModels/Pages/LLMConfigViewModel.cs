@@ -171,7 +171,7 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
                 try
                 {
                     // 显示删除确认对话框
-                    var confirmed = await _dialogService.ShowDeleteConfirmationAsync(config.Provider);
+                    var confirmed = await _dialogService.ShowDeleteConfirmationAsync("配置", config.Provider);
                     
                     if (confirmed)
                     {

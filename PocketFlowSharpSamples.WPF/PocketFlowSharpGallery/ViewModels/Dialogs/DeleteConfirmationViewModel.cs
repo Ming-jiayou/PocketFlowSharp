@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Wpf.Ui.Controls;
+using PocketFlowSharpGallery.Models;
 
 namespace PocketFlowSharpGallery.ViewModels.Dialogs
 {
@@ -12,10 +13,38 @@ namespace PocketFlowSharpGallery.ViewModels.Dialogs
     public partial class DeleteConfirmationViewModel : ObservableObject
     {
         [ObservableProperty]
-        private string _configName = string.Empty;
+        private string _title = "确认删除";
+
+        [ObservableProperty]
+        private string _itemType = "项目";
+
+        [ObservableProperty]
+        private string _itemName = string.Empty;
+
+        [ObservableProperty]
+        private string _warningMessage = "此操作不可撤销，删除后将无法恢复。";
+
+        [ObservableProperty]
+        private string _confirmButtonText = "删除";
+
+        [ObservableProperty]
+        private string _cancelButtonText = "取消";
 
         [ObservableProperty]
         private bool _isConfirmed;
+
+        /// <summary>
+        /// 设置删除确认参数
+        /// </summary>
+        public void SetParameters(DeleteConfirmationParameters parameters)
+        {
+            Title = parameters.Title;
+            ItemType = parameters.ItemType;
+            ItemName = parameters.ItemName;
+            WarningMessage = parameters.WarningMessage;
+            ConfirmButtonText = parameters.ConfirmButtonText;
+            CancelButtonText = parameters.CancelButtonText;
+        }
 
         /// <summary>
         /// 确认命令
