@@ -106,34 +106,61 @@
                     <TabItem Header="Configuration">
                         <ScrollViewer>
                             <StackPanel Margin="10">
-                                <TextBlock Text="LLM Configuration" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                <TextBlock Text="Select LLM Configuration" FontWeight="SemiBold" Margin="0,0,0,10"/>
                                 
+                                <TextBlock Text="Available LLM Configs:" Margin="0,0,0,5"/>
+                                <ComboBox ItemsSource="{Binding LlmConfigs}"
+                                          SelectedItem="{Binding SelectedLLMConfig}"
+                                          Margin="0,0,0,10"
+                                          HorizontalAlignment="Stretch"/>
+
+                                <TextBlock Text="LLM Details:" FontWeight="SemiBold" Margin="0,10,0,5"/>
                                 <TextBlock Text="Model Name:" Margin="0,0,0,5"/>
                                 <ui:TextBox Text="{Binding ModelName}" 
                                             PlaceholderText="e.g., gpt-3.5-turbo"
-                                            Margin="0,0,0,10"/>
+                                            Margin="0,0,0,10"
+                                            IsReadOnly="True"/>
 
                                 <TextBlock Text="Endpoint:" Margin="0,0,0,5"/>
                                 <ui:TextBox Text="{Binding EndPoint}" 
                                             PlaceholderText="e.g., https://api.openai.com/v1"
-                                            Margin="0,0,0,10"/>
+                                            Margin="0,0,0,10"
+                                            IsReadOnly="True"/>
 
                                 <TextBlock Text="API Key:" Margin="0,0,0,5"/>
-                                <ui:PasswordBox x:Name="ApiKeyBox"
-                                                Password="{Binding ApiKey}"
-                                                PlaceholderText="Enter your API key"
-                                                Margin="0,0,0,10"/>
+                                <ui:TextBox Text="{Binding ApiKey}" 
+                                            PlaceholderText="API key will be shown here"
+                                            Margin="0,0,0,10"
+                                            IsReadOnly="True"/>
 
-                                <TextBlock Text="Brave Search API Key:" Margin="0,0,0,5"/>
-                                <ui:PasswordBox x:Name="BraveApiKeyBox"
-                                                Password="{Binding BraveSearchApiKey}"
-                                                PlaceholderText="Enter your Brave Search API key"
-                                                Margin="0,0,0,15"/>
+                                <Separator Margin="0,15,0,15"/>
 
-                                <ui:Button Content="Save Configuration"
-                                           Icon="{ui:SymbolIcon Save24}"
-                                           Command="{Binding SaveConfigurationCommand}"
-                                           HorizontalAlignment="Stretch"/>
+                                <TextBlock Text="Select Search Engine Configuration" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                                
+                                <TextBlock Text="Available Search Engine Configs:" Margin="0,0,0,5"/>
+                                <ComboBox ItemsSource="{Binding SearchEngineConfigs}"
+                                          SelectedItem="{Binding SelectedSearchEngineConfig}"
+                                          Margin="0,0,0,10"
+                                          HorizontalAlignment="Stretch"/>
+
+                                <TextBlock Text="Search Engine Details:" FontWeight="SemiBold" Margin="0,10,0,5"/>
+                                <TextBlock Text="Provider:" Margin="0,0,0,5"/>
+                                <ui:TextBox Text="{Binding SelectedSearchEngineConfig.Provider}" 
+                                            PlaceholderText="Search engine provider"
+                                            Margin="0,0,0,10"
+                                            IsReadOnly="True"/>
+
+                                <TextBlock Text="API Key:" Margin="0,0,0,5"/>
+                                <ui:TextBox Text="{Binding BraveSearchApiKey}" 
+                                            PlaceholderText="Search engine API key"
+                                            Margin="0,0,0,15"
+                                            IsReadOnly="True"/>
+
+                                <ui:Button Content="Refresh Configurations"
+                                           Icon="{ui:SymbolIcon ArrowClockwise24}"
+                                           Command="{Binding RefreshConfigsCommand}"
+                                           HorizontalAlignment="Stretch"
+                                           Margin="0,0,0,10"/>
                             </StackPanel>
                         </ScrollViewer>
                     </TabItem>

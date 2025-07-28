@@ -7,5 +7,10 @@ namespace PocketFlowSharpGallery.Models
         public string EndPoint { get; set; }
         public string ModelName { get; set; }
         public string ApiKey { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Provider} - {ModelName}";
+        }
     }
 }

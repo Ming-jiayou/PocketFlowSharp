@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.Input;
 using PocketFlowSharp;
 using PocketFlowSharpGallery.Models.WebSearchAgent;
+using PocketFlowSharpGallery.Models;
+using PocketFlowSharpGallery.Services;
 using System.Collections.ObjectModel;
 
 namespace PocketFlowSharpGallery.ViewModels.Pages
@@ -36,9 +38,29 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         [ObservableProperty]
         private string _braveSearchApiKey = "";
 
-        public WebSearchViewModel()
+        // Database configuration options
+        [ObservableProperty]
+        private ObservableCollection<LLMConfig> _llmConfigs = new();
+
+        [ObservableProperty]
+        private ObservableCollection<SearchEngineConfig> _searchEngineConfigs = new();
+
+        [ObservableProperty]
+        private LLMConfig _selectedLLMConfig;
+
+        [ObservableProperty]
+        private SearchEngineConfig _selectedSearchEngineConfig;
+
+        private readonly ILLMConfigRepository _llmConfigRepository;
+        private readonly ISearchEngineConfigRepository _searchEngineConfigRepository;
+
+        public WebSearchViewModel(ILLMConfigRepository llmConfigRepository, ISearchEngineConfigRepository searchEngineConfigRepository)
         {
+            _llmConfigRepository = llmConfigRepository;
+            _searchEngineConfigRepository = searchEngineConfigRepository;
+            
             LoadConfiguration();
+            LoadDatabaseConfigs();
         }
 
         [RelayCommand]
@@ -149,12 +171,94 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
             BraveSearchApiKey = "your-brave-search-api-key";
         }
 
+        private async void LoadDatabaseConfigs()
+        {
+            try
+            {
+                // Load LLM configurations
+                var llmConfigs = await _llmConfigRepository.GetAllAsync();
+                LlmConfigs.Clear();
+                foreach (var config in llmConfigs)
+                {
+                    LlmConfigs.Add(config);
+                }
+
+                // Load Search Engine configurations
+                var searchEngineConfigs = await _searchEngineConfigRepository.GetAllAsync();
+                SearchEngineConfigs.Clear();
+                foreach (var config in searchEngineConfigs)
+                {
+                    SearchEngineConfigs.Add(config);
+                }
+
+                // Auto-select first available configs
+                if (LlmConfigs.Any())
+                {
+                    SelectedLLMConfig = LlmConfigs.First();
+                    ApplyLLMConfig(SelectedLLMConfig);
+                }
+
+                if (SearchEngineConfigs.Any())
+                {
+                    SelectedSearchEngineConfig = SearchEngineConfigs.First();
+                    ApplySearchEngineConfig(SelectedSearchEngineConfig);
+                }
+            }
+            catch (Exception ex)
+            {
+                SearchStatus = $"Error loading configurations: {ex.Message}";
+            }
+        }
+
+        partial void OnSelectedLLMConfigChanged(LLMConfig value)
+        {
+            if (value != null)
+            {
+                ApplyLLMConfig(value);
+            }
+        }
+
+        partial void OnSelectedSearchEngineConfigChanged(SearchEngineConfig value)
+        {
+            if (value != null)
+            {
+                ApplySearchEngineConfig(value);
+            }
+        }
+
+        private void ApplyLLMConfig(LLMConfig config)
+        {
+            ModelName = config.ModelName;
+            EndPoint = config.EndPoint;
+            ApiKey = config.ApiKey;
+        }
+
+        private void ApplySearchEngineConfig(SearchEngineConfig config)
+        {
+            BraveSearchApiKey = config.ApiKey;
+        }
+
         [RelayCommand]
         private void SaveConfiguration()
         {
             // Save configuration to app settings
             // This can be implemented later to persist settings
             SearchStatus = "Configuration saved";
+        }
+
+        [RelayCommand]
+        private async Task RefreshConfigsAsync()
+        {
+            SearchStatus = "Refreshing configurations...";
+            try
+            {
+                await Task.Run(LoadDatabaseConfigs);
+                SearchStatus = "Configurations refreshed successfully";
+            }
+            catch (Exception ex)
+            {
+                SearchStatus = $"Error refreshing configurations: {ex.Message}";
+            }
         }
     }
 }
