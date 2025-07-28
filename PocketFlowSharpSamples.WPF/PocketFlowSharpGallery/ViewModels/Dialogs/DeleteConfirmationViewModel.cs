@@ -20,26 +20,18 @@ namespace PocketFlowSharpGallery.ViewModels.Dialogs
         /// <summary>
         /// 确认命令
         /// </summary>
-        public ICommand ConfirmCommand { get; }
-
-        /// <summary>
-        /// 取消命令
-        /// </summary>
-        public ICommand CancelCommand { get; }
-
-        public DeleteConfirmationViewModel()
-        {
-            ConfirmCommand = new RelayCommand(OnConfirm);
-            CancelCommand = new RelayCommand(OnCancel);
-        }
-
-        private void OnConfirm()
+        [RelayCommand]
+        private void Confirm()
         {
             IsConfirmed = true;
             CloseDialog(true);
         }
 
-        private void OnCancel()
+        /// <summary>
+        /// 取消命令
+        /// </summary>
+        [RelayCommand]
+        private void Cancel()
         {
             IsConfirmed = false;
             CloseDialog(false);
