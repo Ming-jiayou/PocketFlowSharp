@@ -20,3 +20,4 @@ ASALocalRun/
 **/.vs/
 *.env
 **.db
+**/logs
