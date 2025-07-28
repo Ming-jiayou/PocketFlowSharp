@@ -6,12 +6,14 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.EntityFrameworkCore;
 
 namespace PocketFlowSharpGallery.ViewModels.Pages
 {
     public partial class LLMConfigViewModel : ObservableObject
     {
         private readonly ILLMConfigRepository _repository;
+        private readonly IDialogService _dialogService;
 
         [ObservableProperty]
         private LLMConfig _config = new LLMConfig();
@@ -31,9 +33,10 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         [ObservableProperty]
         private bool _isApiKeyVisible = false;
 
-        public LLMConfigViewModel(ILLMConfigRepository repository)
+        public LLMConfigViewModel(ILLMConfigRepository repository, IDialogService dialogService)
         {
             _repository = repository;
+            _dialogService = dialogService;
         }
 
         public async Task InitializeAsync()
@@ -165,8 +168,33 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         {
             if (parameter is LLMConfig config && config != null)
             {
-                await _repository.DeleteAsync(config.Id);
-                await LoadConfigsAsync();
+                try
+                {
+                    // 显示删除确认对话框
+                    var confirmed = await _dialogService.ShowDeleteConfirmationAsync(config.Provider);
+                    
+                    if (confirmed)
+                    {
+                        await _repository.DeleteAsync(config.Id);
+                        await LoadConfigsAsync();
+                        
+                        // 显示删除成功提示
+                        MessageBox.Show($"配置 '{config.Provider}' 已成功删除！", "删除成功",
+                            MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                catch (DbUpdateException ex)
+                {
+                    // 处理数据库异常
+                    MessageBox.Show($"删除配置时发生数据库错误：{ex.Message}", "删除失败",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                catch (Exception ex)
+                {
+                    // 处理其他异常
+                    MessageBox.Show($"删除配置时发生错误：{ex.Message}", "删除失败",
+                        MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

@@ -1,0 +1,71 @@
+<ui:FluentWindow x:Class="PocketFlowSharpGallery.Views.Dialogs.DeleteConfirmationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        mc:Ignorable="d"
+        Title="确认删除"
+        Width="400"
+        Height="200"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        ShowInTaskbar="False"
+        Topmost="True">
+    
+    <ui:FluentWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Wpf.Ui;component/Controls/FluentWindow/FluentWindow.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ui:FluentWindow.Resources>
+    
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- 标题和图标 -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,15">
+            <ui:SymbolIcon Symbol="Warning24" Foreground="{DynamicResource SystemFillColorCautionBrush}" FontSize="24" Margin="0,0,10,0"/>
+            <TextBlock Text="确认删除" 
+                       Style="{StaticResource BodyStrongTextBlockStyle}" 
+                       FontSize="18"
+                       VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        <!-- 警告文本 -->
+        <TextBlock Grid.Row="1" 
+                   TextWrapping="Wrap"
+                   Style="{StaticResource BodyTextBlockStyle}">
+            <Run Text="您确定要删除配置"/>
+            <Run Text=" "/>
+            <Run Text="{Binding ConfigName}" FontWeight="SemiBold"/>
+            <Run Text=" "/>
+            <Run Text="吗？"/>
+            <LineBreak/>
+            <Run Text="此操作不可撤销，删除后配置将无法恢复。" Foreground="{DynamicResource SystemFillColorCriticalBrush}"/>
+        </TextBlock>
+        
+        <!-- 按钮区域 -->
+        <StackPanel Grid.Row="2" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Right" 
+                    Margin="0,20,0,0">
+            <ui:Button x:Name="CancelButton"
+                       Content="取消"
+                       Margin="0,0,10,0"
+                       Width="80"
+                       IsCancel="True"
+                       Command="{Binding CancelCommand}"/>
+            <ui:Button x:Name="ConfirmButton"
+                       Content="删除"
+                       Width="80"
+                       IsDefault="True"
+                       Command="{Binding ConfirmCommand}"/>
+        </StackPanel>
+    </Grid>
+</ui:FluentWindow>

@@ -68,6 +68,9 @@ namespace PocketFlowSharpGallery
                 
                 // Register LLMConfig repository
                 services.AddScoped<ILLMConfigRepository, LLMConfigRepository>();
+                
+                // Register dialog service
+                services.AddScoped<IDialogService, DialogService>();               
             }).Build();
 
         /// <summary>
