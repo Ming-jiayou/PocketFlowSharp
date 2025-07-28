@@ -5,5 +5,8 @@
     <Compile Update="Views\Pages\LLMConfigPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Pages\WebSearchPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

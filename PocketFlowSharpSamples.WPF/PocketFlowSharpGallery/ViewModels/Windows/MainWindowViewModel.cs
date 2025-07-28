@@ -28,6 +28,12 @@ namespace PocketFlowSharpGallery.ViewModels.Windows
                 Content = "LLM Config",
                 Icon = new SymbolIcon { Symbol = SymbolRegular.DataHistogram24 },
                 TargetPageType = typeof(Views.Pages.LLMConfigPage)
+            },
+            new NavigationViewItem()
+            {
+                Content = "Web Search Agent",
+                Icon = new SymbolIcon { Symbol = SymbolRegular.Search24 },
+                TargetPageType = typeof(Views.Pages.WebSearchPage)
             }
         };
 

@@ -20,3 +20,6 @@ ASALocalRun/
 **/.vs/
 *.env
 **.db
+
+# Ignore Visual Studio project files
+*.csproj.user

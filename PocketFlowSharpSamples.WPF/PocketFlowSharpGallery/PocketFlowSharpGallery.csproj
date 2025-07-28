@@ -24,6 +24,8 @@
     <PackageReference Include="WPF-UI.DependencyInjection" Version="4.0.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.7" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0 " />
+    <PackageReference Include="OpenAI" Version="2.1.0" />
+    <PackageReference Include="dotenv.net" Version="3.2.0" />
   </ItemGroup>
 
   <ItemGroup>
