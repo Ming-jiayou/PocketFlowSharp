@@ -97,7 +97,9 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
                 var shared = new Dictionary<string, object> { { "question", Question } };
                 
                 SearchStatus = "Processing question...";
-                await Task.Run(() => flow.Run(shared));
+
+                flow.Run(shared);
+                //await Task.Run(() => flow.Run(shared));
 
                 // Get the result
                 string answer = shared.ContainsKey("answer") ? shared["answer"].ToString() ?? "" : "No answer found";

@@ -36,66 +36,92 @@ namespace PocketFlowSharpGallery.Models.WebSearchAgent
             }
         }
 
+        // 使用静态 HttpClient 实例以避免端口耗尽和性能问题
+        private static readonly HttpClient _httpClient = CreateHttpClient();
+
+        private static HttpClient CreateHttpClient()
+        {
+            var client = new HttpClient();
+            // 设置超时时间为 30 秒
+            client.Timeout = TimeSpan.FromSeconds(30);
+            return client;
+        }
+
         public static string SearchWebSync(string query)
         {
-            return SearchWeb(query).GetAwaiter().GetResult();
+            // 使用 Task.Run 在线程池线程上执行异步操作，避免死锁
+            return Task.Run(() => SearchWeb(query)).GetAwaiter().GetResult();
         }
 
         public static async Task<string> SearchWeb(string query)
         {
             string apiKey = BraveSearchApiKey;
 
-            if (string.IsNullOrEmpty(apiKey))
-            {
-                return "Error: Brave Search API key not configured";
-            }
-
             // Set the request URL
-            string url = $"https://api.search.brave.com/res/v1/web/search?q={Uri.EscapeDataString(query)}";
+            string url = $"https://api.search.brave.com/res/v1/web/search?q={query}";
 
-            // Create an HttpClient instance
-            using (HttpClient client = new HttpClient())
+            try
             {
-                try
+                // 清除之前的请求头
+                _httpClient.DefaultRequestHeaders.Clear();
+                
+                // Set request headers
+                _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                _httpClient.DefaultRequestHeaders.Add("x-subscription-token", apiKey);
+
+                // Send GET request with ConfigureAwait(false) 避免上下文切换问题
+                HttpResponseMessage response = await _httpClient.GetAsync(url).ConfigureAwait(false);
+
+                // Check if the request was successful
+                if (response.IsSuccessStatusCode)
                 {
-                    // Set request headers
-                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Add("x-subscription-token", apiKey);
+                    // Request succeeded, parse the returned JSON data
+                    string jsonResponse = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    using JsonDocument doc = JsonDocument.Parse(jsonResponse);
+                    JsonElement root = doc.RootElement;
+                    JsonElement results = root.GetProperty("web").GetProperty("results");
 
-                    // Send GET request
-                    HttpResponseMessage response = await client.GetAsync(url);
-
-                    // Check if the request was successful
-                    if (response.IsSuccessStatusCode)
+                    // Build the results string
+                    StringBuilder resultsStr = new StringBuilder();
+                    foreach (JsonElement searchResult in results.EnumerateArray())
                     {
-                        // Request succeeded, parse the returned JSON data
-                        string jsonResponse = await response.Content.ReadAsStringAsync();
-                        using JsonDocument doc = JsonDocument.Parse(jsonResponse);
-                        JsonElement root = doc.RootElement;
-                        JsonElement results = root.GetProperty("web").GetProperty("results");
+                        string title = searchResult.GetProperty("title").GetString() ?? "";
+                        string resultUrl = searchResult.GetProperty("url").GetString() ?? "";
+                        string description = searchResult.GetProperty("description").GetString() ?? "";
 
-                        // Build the results string
-                        string resultsStr = "";
-                        foreach (JsonElement result in results.EnumerateArray())
-                        {
-                            string title = result.GetProperty("title").GetString() ?? "";
-                            string resultUrl = result.GetProperty("url").GetString() ?? "";
-                            string description = result.GetProperty("description").GetString() ?? "";
-
-                            resultsStr += $"Title: {title}\nURL: {resultUrl}\nDescription: {description}\n\n";
-                        }
-                        return resultsStr;
+                        resultsStr.AppendLine($"Title: {title}");
+                        resultsStr.AppendLine($"URL: {resultUrl}");
+                        resultsStr.AppendLine($"Description: {description}");
+                        resultsStr.AppendLine();
                     }
-                    else
-                    {
-                        // Request failed, print error message
-                        return $"Error: Search request failed with status code {response.StatusCode}";
-                    }
+                    
+                    string finalResult = resultsStr.ToString();
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(finalResult);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    return finalResult;
                 }
-                catch (Exception ex)
+                else
                 {
-                    return $"Error: Search request failed with exception {ex.Message}";
+                    // Request failed, print error message
+                    Console.WriteLine($"Request failed with status code: {response.StatusCode}");
+                    return $"Error: Search request failed with status code {response.StatusCode}";
                 }
+            }
+            catch (TaskCanceledException ex)
+            {
+                Console.WriteLine($"Request timed out: {ex.Message}");
+                return "Error: Search request timed out after 30 seconds";
+            }
+            catch (HttpRequestException ex)
+            {
+                Console.WriteLine($"HTTP request failed: {ex.Message}");
+                return $"Error: HTTP request failed - {ex.Message}";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Unexpected error: {ex.Message}");
+                return $"Error: Unexpected error occurred - {ex.Message}";
             }
         }
 
