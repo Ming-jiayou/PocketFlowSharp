@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Web_Search_Agent
 {
-    public class DecideActionNode : Node
+    public class DecideActionNode : AsyncNode
     {
-        public override object Prep(Dictionary<string, object> shared)
+        protected override async Task<object> PrepAsync(Dictionary<string, object> shared)
         {
             // Prepare the context and question for the decision-making process
             string context = shared.ContainsKey("context") ? (string)shared["context"] : "No previous search";
@@ -19,7 +20,7 @@ namespace Web_Search_Agent
             return new Tuple<string, string>(question, context);
         }
 
-        public override object Exec(object inputs)
+        protected override async Task<object> ExecAsync(object inputs)
         {
             // Call the LLM to decide whether to search or answer
             var (question, context) = (Tuple<string, string>)inputs;
@@ -63,7 +64,7 @@ IMPORTANT: Make sure to:
 ";
 
             // Call the LLM to make a decision
-            string response = Utils.CallLLM(prompt);
+            string response = await Utils.CallLLMAsync(prompt);
 
             // Parse the response to get the decision
             string yamlStr = response.Split("```yaml")[1].Split("```")[0].Trim();
@@ -72,7 +73,7 @@ IMPORTANT: Make sure to:
             return decision;
         }
 
-        public override string Post(Dictionary<string, object> shared, object prepResult, object execResult)
+        protected override async Task<object> PostAsync(Dictionary<string, object> shared, object prepResult, object execResult)
         {
             // Save the decision and determine the next step in the flow
             var decision = (Dictionary<string, object>)execResult;

@@ -12,6 +12,8 @@
 
     <Page.Resources>
         <helpers:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+        <helpers:CountToVisibilityConverter x:Key="CountToVisibilityConverter"/>
+        <helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     </Page.Resources>
 
     <Grid Margin="20">
@@ -34,6 +36,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             
             <ui:TextBox Grid.Column="0"
@@ -48,7 +51,36 @@
                        Icon="{ui:SymbolIcon Search24}"
                        Command="{Binding SearchCommand}"
                        IsEnabled="{Binding IsSearching, Converter={StaticResource InverseBooleanConverter}}"
+                       MinWidth="100"
+                       Margin="0,0,10,0"/>
+            
+            <ui:Button Grid.Column="2"
+                       Content="Cancel"
+                       Icon="{ui:SymbolIcon Dismiss24}"
+                       Command="{Binding CancelSearchCommand}"
+                       IsEnabled="{Binding CanCancel}"
                        MinWidth="100"/>
+        </Grid>
+
+        <!-- Progress Bar -->
+        <Grid Grid.Row="1" Margin="0,0,0,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <ProgressBar Grid.Row="0"
+                         Value="{Binding ProgressValue}"
+                         Maximum="100"
+                         Height="8"
+                         Margin="0,0,0,5"
+                         Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+            
+            <TextBlock Grid.Row="1"
+                       Text="{Binding CurrentStep}"
+                       FontSize="12"
+                       Foreground="Gray"
+                       Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}"/>
         </Grid>
 
         <!-- Main Content -->
@@ -63,19 +95,38 @@
             <Grid Grid.Column="0" Margin="0,0,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
                     <TextBlock Text="Search Results" FontSize="16" FontWeight="SemiBold"/>
-                    <TextBlock Text="{Binding SearchStatus}" 
-                               FontSize="12" 
-                               Foreground="Gray" 
+                    <TextBlock Text="{Binding SearchStatus}"
+                               FontSize="12"
+                               Foreground="Gray"
                                Margin="10,2,0,0"/>
                 </StackPanel>
 
-                <ui:TextBox Grid.Row="1"
+                <!-- Intermediate Messages -->
+                <ui:Card Grid.Row="1"
+                         Margin="0,0,0,10"
+                         Visibility="{Binding IntermediateMessages.Count, Converter={StaticResource CountToVisibilityConverter}}">
+                    <ScrollViewer Height="150" VerticalScrollBarVisibility="Auto">
+                        <ItemsControl ItemsSource="{Binding IntermediateMessages}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding}"
+                                               TextWrapping="Wrap"
+                                               FontSize="11"
+                                               Margin="0,2"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
+                </ui:Card>
+
+                <ui:TextBox Grid.Row="2"
                             Text="{Binding Result, Mode=OneWay}"
                             IsReadOnly="True"
                             AcceptsReturn="True"
@@ -85,7 +136,7 @@
                             FontFamily="Consolas"
                             FontSize="12"/>
 
-                <ui:Button Grid.Row="2"
+                <ui:Button Grid.Row="3"
                            Content="Clear Results"
                            Icon="{ui:SymbolIcon Delete24}"
                            Command="{Binding ClearResultCommand}"

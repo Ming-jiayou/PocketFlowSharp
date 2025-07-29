@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Web_Search_Agent
@@ -30,6 +31,39 @@ namespace Web_Search_Agent
             ChatCompletion completion = client.CompleteChat(prompt);
 
             return completion.Content[0].Text;
+        }
+
+        public static async Task<string> CallLLMAsync(string prompt)
+        {
+            ApiKeyCredential apiKeyCredential = new ApiKeyCredential(ApiKey);
+
+            OpenAIClientOptions openAIClientOptions = new OpenAIClientOptions();
+            openAIClientOptions.Endpoint = new Uri(EndPoint);
+
+            ChatClient client = new(model: ModelName, apiKeyCredential, openAIClientOptions);
+
+            ChatCompletion completion = await client.CompleteChatAsync(prompt);
+
+            return completion.Content[0].Text;
+        }
+
+        public static async Task<AsyncCollectionResult<StreamingChatCompletionUpdate>> CallLLMStreamingAsync(string prompt, CancellationToken cancellationToken = default)
+        {
+            ApiKeyCredential apiKeyCredential = new ApiKeyCredential(ApiKey);
+
+            OpenAIClientOptions openAIClientOptions = new OpenAIClientOptions();
+            openAIClientOptions.Endpoint = new Uri(EndPoint);
+
+            ChatClient client = new(model: ModelName, apiKeyCredential, openAIClientOptions);
+
+            ChatCompletionOptions chatCompletionOptions = new ChatCompletionOptions();
+
+            List<ChatMessage> messages = new List<ChatMessage>();
+            messages.Add(new UserChatMessage(prompt));
+
+            var completion = client.CompleteChatStreamingAsync(messages, chatCompletionOptions, cancellationToken);
+
+            return completion;
         }
 
         public static string SearchWebSync(string query)
@@ -85,6 +119,11 @@ namespace Web_Search_Agent
                     return $"Error: Search request failed with status code {response.StatusCode}";
                 }
             }
+        }
+
+        public static async Task<string> SearchWebAsync(string query)
+        {
+            return await SearchWeb(query);
         }
 
         // Simple YAML parser implementation to avoid external dependencies

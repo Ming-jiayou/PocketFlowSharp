@@ -6,7 +6,7 @@ namespace Web_Search_Agent
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             // Load .env file
             DotEnv.Load();
@@ -23,26 +23,26 @@ namespace Web_Search_Agent
             Utils.EndPoint = EndPoint;
             Utils.ApiKey = ApiKey;
             Utils.BraveSearchApiKey = BraveSearchApiKey;
-          
+           
             // Get question from command line if provided
-            string question = "PocketFlow是什么？";
+            string question = "智谱2025年最新模型是什么？";
 
             // Create the agent flow
-            Flow flow = CreatFlow();
+            AsyncFlow flow = CreatFlow();
 
             // Process the question
             var shared = new Dictionary<string, object> { { "question", question } };
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($"🤔 Processing question: {question}");
-            flow.Run(shared);
+            await flow.RunAsync(shared);
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("\n🎯 Final Answer:");
             Console.WriteLine(shared.ContainsKey("answer") ? shared["answer"] : "No answer found");
 
         }
 
-        public static Flow CreatFlow()
+        public static AsyncFlow CreatFlow()
         {
             // Create instances of each node
             var decide = new DecideActionNode();
@@ -61,7 +61,7 @@ namespace Web_Search_Agent
             _ = search - "decide" - decide;
 
             // Create the flow, starting with the DecideAction node
-            var flow = new Flow(decide);
+            var flow = new AsyncFlow(decide);
 
             return flow;
         }

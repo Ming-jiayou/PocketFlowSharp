@@ -7,27 +7,23 @@ using System.Threading.Tasks;
 
 namespace Web_Search_Agent
 {
-    public class SearchWebNode : Node
+    public class SearchWebNode : AsyncNode
     {
-        public override object Prep(Dictionary<string, object> shared)
+        protected override async Task<object> PrepAsync(Dictionary<string, object> shared)
         {
             // Get the search query from the shared store
             return shared["search_query"];
         }
 
-        public override object Exec(object searchQuery)
+        protected override async Task<object> ExecAsync(object searchQuery)
         {
-            //// Search the web for the given query
-            //Console.WriteLine($"🌐 Searching the web for: {searchQuery}");
-            //var results = await Utils.SearchWeb(searchQuery.ToString());
-            //return results;    
             Console.WriteLine($"🌐 Searching the web for: {searchQuery}");
             string query = searchQuery.ToString();
-            var results = Utils.SearchWebSync(query);
+            var results = await Utils.SearchWebAsync(query);
             return results;
         }
 
-        public override string Post(Dictionary<string, object> shared, object prepResult, object execResult)
+        protected override async Task<object> PostAsync(Dictionary<string, object> shared, object prepResult, object execResult)
         {
             // Save the search results and go back to the decision node
             string previous = shared.ContainsKey("context") ? (string)shared["context"] : "";

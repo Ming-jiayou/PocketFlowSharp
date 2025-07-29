@@ -5,6 +5,8 @@ using PocketFlowSharpGallery.Models.WebSearchAgent;
 using PocketFlowSharpGallery.Models;
 using PocketFlowSharpGallery.Services;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace PocketFlowSharpGallery.ViewModels.Pages
 {
@@ -21,6 +23,18 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
 
         [ObservableProperty]
         private string _searchStatus = "Ready";
+
+        [ObservableProperty]
+        private int _progressValue = 0;
+
+        [ObservableProperty]
+        private string _currentStep = "";
+
+        [ObservableProperty]
+        private ObservableCollection<string> _intermediateMessages = new();
+
+        [ObservableProperty]
+        private bool _canCancel = false;
 
         [ObservableProperty]
         private ObservableCollection<string> _searchHistory = new();
@@ -53,6 +67,8 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
 
         private readonly ILLMConfigRepository _llmConfigRepository;
         private readonly ISearchEngineConfigRepository _searchEngineConfigRepository;
+        private CancellationTokenSource _cancellationTokenSource;
+        private IProgressReporter _progressReporter;
 
         public WebSearchViewModel(ILLMConfigRepository llmConfigRepository, ISearchEngineConfigRepository searchEngineConfigRepository)
         {
@@ -61,6 +77,9 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
             
             LoadConfiguration();
             LoadDatabaseConfigs();
+            
+            // 初始化中间消息集合
+            IntermediateMessages = new ObservableCollection<string>();
         }
 
         [RelayCommand]
@@ -78,47 +97,72 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
                 return;
             }
 
+            // 取消之前的操作
+            _cancellationTokenSource?.Cancel();
+            _cancellationTokenSource = new CancellationTokenSource();
+
             IsSearching = true;
-            SearchStatus = "Searching...";
+            CanCancel = true;
+            SearchStatus = "Initializing...";
             Result = "";
+            ProgressValue = 0;
+            IntermediateMessages.Clear();
 
             try
             {
-                // Update Utils with current configuration
+                // 创建进度报告器
+                _progressReporter = new WpfProgressReporter(this);
+
+                // 更新配置
                 Utils.ModelName = ModelName;
                 Utils.EndPoint = EndPoint;
                 Utils.ApiKey = ApiKey;
                 Utils.BraveSearchApiKey = BraveSearchApiKey;
 
-                // Create the agent flow
-                Flow flow = CreateFlow();
+                // 创建异步流程
+                var flow = CreateAsyncFlow();
 
-                // Process the question
+                // 处理问题的共享数据
                 var shared = new Dictionary<string, object> { { "question", Question } };
                 
-                SearchStatus = "Processing question...";
+                _progressReporter.ReportProgress("init", "Starting search process...", 5);
+                
+                // 运行异步流程
+                await flow.RunAsync(shared);
 
-                flow.Run(shared);
-                //await Task.Run(() => flow.Run(shared));
-
-                // Get the result
+                // 获取最终结果
                 string answer = shared.ContainsKey("answer") ? shared["answer"].ToString() ?? "" : "No answer found";
                 Result = answer;
 
-                // Add to history
+                // 添加到历史记录
                 SearchHistory.Insert(0, $"Q: {Question}\nA: {answer}\n");
 
-                SearchStatus = "Completed";
+                _progressReporter.ReportComplete("Search completed successfully");
+            }
+            catch (OperationCanceledException)
+            {
+                Result = "Search cancelled by user";
+                SearchStatus = "Cancelled";
             }
             catch (Exception ex)
             {
                 Result = $"Error: {ex.Message}";
                 SearchStatus = "Error occurred";
+                _progressReporter?.ReportError(ex.Message);
             }
             finally
             {
                 IsSearching = false;
+                CanCancel = false;
+                _cancellationTokenSource?.Dispose();
+                _cancellationTokenSource = null;
             }
+        }
+
+        [RelayCommand]
+        private void CancelSearch()
+        {
+            _cancellationTokenSource?.Cancel();
         }
 
         [RelayCommand]
@@ -132,29 +176,24 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         {
             Result = "";
             SearchStatus = "Ready";
+            ProgressValue = 0;
+            IntermediateMessages.Clear();
         }
 
-        private Flow CreateFlow()
+        private AsyncFlow CreateAsyncFlow()
         {
-            // Create instances of each node
-            var decide = new DecideActionNode();
-            var search = new SearchWebNode();
-            var answer = new AnswerQuestionNode();
+            // 创建异步节点实例
+            var decide = new DecideActionAsyncNode(_progressReporter);
+            var search = new SearchWebAsyncNode(_progressReporter);
+            var answer = new AnswerQuestionAsyncNode(_progressReporter);
 
-            // Connect the nodes
-            // If DecideAction returns "search", go to SearchWeb
+            // 连接节点
             decide.Next(search, "search");
-
-            // If DecideAction returns "answer", go to AnswerQuestion
             decide.Next(answer, "answer");
-
-            // After SearchWeb completes and returns "decide", go back to DecideAction
             search.Next(decide, "decide");
 
-            // Create the flow, starting with the DecideAction node
-            var flow = new Flow(decide);
-
-            return flow;
+            // 创建异步流程
+            return new AsyncFlow(decide);
         }
 
         private bool ValidateConfiguration()

@@ -36,6 +36,27 @@ namespace PocketFlowSharpGallery.Models.WebSearchAgent
             }
         }
 
+        public static async Task<string> CallLLMAsync(string prompt)
+        {
+            try
+            {
+                ApiKeyCredential apiKeyCredential = new ApiKeyCredential(ApiKey);
+
+                OpenAIClientOptions openAIClientOptions = new OpenAIClientOptions();
+                openAIClientOptions.Endpoint = new Uri(EndPoint);
+
+                ChatClient client = new(model: ModelName, apiKeyCredential, openAIClientOptions);
+
+                ChatCompletion completion = await client.CompleteChatAsync(prompt);
+                
+                return completion.Content[0].Text;
+            }
+            catch (Exception ex)
+            {
+                return $"Error calling LLM: {ex.Message}";
+            }
+        }
+
         // 使用静态 HttpClient 实例以避免端口耗尽和性能问题
         private static readonly HttpClient _httpClient = CreateHttpClient();
 
@@ -51,6 +72,11 @@ namespace PocketFlowSharpGallery.Models.WebSearchAgent
         {
             // 使用 Task.Run 在线程池线程上执行异步操作，避免死锁
             return Task.Run(() => SearchWeb(query)).GetAwaiter().GetResult();
+        }
+
+        public static async Task<string> SearchWebAsync(string query)
+        {
+            return await SearchWeb(query);
         }
 
         public static async Task<string> SearchWeb(string query)

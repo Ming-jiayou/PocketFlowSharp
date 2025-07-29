@@ -1,0 +1,17 @@
+2025-07-29 18:57:27.760 +08:00 [INF] Starting workflow with session_id: 5627a5675c484109ad0e6ee7fc12b152
+2025-07-29 19:03:04.162 +08:00 [INF] Feature confirmed for session 5627a5675c484109ad0e6ee7fc12b152 with feature: wpf-web-search-agent-async-refactor
+2025-07-29 19:03:43.680 +08:00 [INF] Starting requirements gathering for session  5627a5675c484109ad0e6ee7fc12b152  wpf-web-search-agent-async-refactor
+2025-07-29 19:05:41.808 +08:00 [INF] Requirements confirmed for session 5627a5675c484109ad0e6ee7fc12b152 wpf-web-search-agent-async-refactor
+2025-07-29 19:07:34.448 +08:00 [INF] Starting design phase for session 5627a5675c484109ad0e6ee7fc12b152 wpf-web-search-agent-async-refactor
+2025-07-29 20:49:04.575 +08:00 [INF] [Cleaned up expired session: 5627a5675c484109ad0e6ee7fc12b152
+2025-07-29 20:49:04.593 +08:00 [INF] [Cleaned up 1 expired sessions
+2025-07-29 20:54:09.191 +08:00 [INF] Design confirmed for session 5627a5675c484109ad0e6ee7fc12b152 wpf-web-search-agent-async-refactor
+2025-07-29 20:54:09.193 +08:00 [FTL] Error executing requirements confirmation
+System.Collections.Generic.KeyNotFoundException: Session not found: 5627a5675c484109ad0e6ee7fc12b152
+   at SpecCodingMcpServer.Services.SessionManager.GetSession(String sessionId) in D:\Learning\LearningProjects\AI-Related\spec-coding-mcp\src\SpecCodingMcpServer\Services\SessionManager.cs:line 122
+   at SpecCodingMcpServer.Tools.DesignConfirmedTool.SpecCodingDesignConfirmed(String sessionId, String featureName) in D:\Learning\LearningProjects\AI-Related\spec-coding-mcp\src\SpecCodingMcpServer\Tools\DesignConfirmedTool.cs:line 73
+2025-07-29 20:54:21.974 +08:00 [INF] Starting  create task list phase for session  5627a5675c484109ad0e6ee7fc12b152  wpf-web-search-agent-async-refactor
+2025-07-29 20:54:21.975 +08:00 [FTL] Error executing create task list start
+System.Collections.Generic.KeyNotFoundException: Session not found: 5627a5675c484109ad0e6ee7fc12b152
+   at SpecCodingMcpServer.Services.SessionManager.GetSession(String sessionId) in D:\Learning\LearningProjects\AI-Related\spec-coding-mcp\src\SpecCodingMcpServer\Services\SessionManager.cs:line 122
+   at SpecCodingMcpServer.Tools.TasksStartTool.SpecCodingTasksStart(String sessionId, String featureName) in D:\Learning\LearningProjects\AI-Related\spec-coding-mcp\src\SpecCodingMcpServer\Tools\TasksStartTool.cs:line 44
