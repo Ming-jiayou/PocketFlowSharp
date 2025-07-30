@@ -26,9 +26,6 @@ namespace PocketFlowSharpGallery.Models.WebSearchAgent
             string question = (string)shared["question"];
             string context = shared.ContainsKey("context") ? (string)shared["context"] : "";
 
-            _progressReporter.ReportProgress("answer", "Preparing final answer...", 85);
-            _progressReporter.ReportIntermediateResult("answer", "Generating comprehensive answer...");
-
             return new Tuple<string, string>(question, context);
         }
 
@@ -36,8 +33,7 @@ namespace PocketFlowSharpGallery.Models.WebSearchAgent
         {
             var (question, context) = (Tuple<string, string>)inputs;
 
-            _progressReporter.ReportProgress("answer", "Consulting AI for final answer...", 90);
-            _progressReporter.ReportIntermediateResult("answer", "AI is crafting the final response...");
+            _progressReporter.PrintMessage("[回答节点] 咨询AI生成最终答案...");
 
             // 创建提示词生成最终答案
             string prompt = $@"
@@ -58,19 +54,18 @@ Provide a detailed, accurate, and helpful answer using the research results abov
                 // 使用异步调用获取答案
                 string answer = await Utils.CallLLMAsync(prompt);
                 
-                _progressReporter.ReportProgress("answer", "Finalizing answer...", 95);
-                _progressReporter.ReportIntermediateResult("answer", "Answer generated successfully");
+                _progressReporter.PrintMessage("[回答节点] 答案生成成功");
 
                 return answer;
             }
             catch (OperationCanceledException)
             {
-                _progressReporter.ReportIntermediateResult("info", "Answer generation was cancelled");
+                _progressReporter.PrintMessage("[回答节点] 答案生成已取消");
                 return "Answer generation was cancelled by user";
             }
             catch (Exception ex)
             {
-                _progressReporter.ReportError($"Failed to generate answer: {ex.Message}");
+                _progressReporter.PrintMessage($"[回答节点] 错误: 生成答案失败 - {ex.Message}");
                 throw;
             }
         }
@@ -80,9 +75,6 @@ Provide a detailed, accurate, and helpful answer using the research results abov
             // 保存最终答案
             string answer = execResult.ToString() ?? "No answer generated";
             shared["answer"] = answer;
-
-            _progressReporter.ReportProgress("answer", "Answer complete", 100);
-            _progressReporter.ReportIntermediateResult("answer", "Process completed successfully");
 
             return "done";
         }

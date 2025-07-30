@@ -62,27 +62,6 @@
                        MinWidth="100"/>
         </Grid>
 
-        <!-- Progress Bar -->
-        <Grid Grid.Row="1" Margin="0,0,0,10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            
-            <ProgressBar Grid.Row="0"
-                         Value="{Binding ProgressValue}"
-                         Maximum="100"
-                         Height="8"
-                         Margin="0,0,0,5"
-                         Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-            
-            <TextBlock Grid.Row="1"
-                       Text="{Binding CurrentStep}"
-                       FontSize="12"
-                       Foreground="Gray"
-                       Visibility="{Binding IsSearching, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-        </Grid>
-
         <!-- Main Content -->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -94,7 +73,6 @@
             <!-- Results Panel -->
             <Grid Grid.Column="0" Margin="0,0,10,0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -108,25 +86,7 @@
                                Margin="10,2,0,0"/>
                 </StackPanel>
 
-                <!-- Intermediate Messages -->
-                <ui:Card Grid.Row="1"
-                         Margin="0,0,0,10"
-                         Visibility="{Binding IntermediateMessages.Count, Converter={StaticResource CountToVisibilityConverter}}">
-                    <ScrollViewer Height="150" VerticalScrollBarVisibility="Auto">
-                        <ItemsControl ItemsSource="{Binding IntermediateMessages}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding}"
-                                               TextWrapping="Wrap"
-                                               FontSize="11"
-                                               Margin="0,2"/>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
-                </ui:Card>
-
-                <ui:TextBox Grid.Row="2"
+                <ui:TextBox Grid.Row="1"
                             Text="{Binding Result, Mode=OneWay}"
                             IsReadOnly="True"
                             AcceptsReturn="True"
@@ -136,7 +96,7 @@
                             FontFamily="Consolas"
                             FontSize="12"/>
 
-                <ui:Button Grid.Row="3"
+                <ui:Button Grid.Row="2"
                            Content="Clear Results"
                            Icon="{ui:SymbolIcon Delete24}"
                            Command="{Binding ClearResultCommand}"

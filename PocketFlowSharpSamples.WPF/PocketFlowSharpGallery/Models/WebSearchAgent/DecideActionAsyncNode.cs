@@ -24,8 +24,7 @@ namespace PocketFlowSharpGallery.Models.WebSearchAgent
             string context = shared.ContainsKey("context") ? (string)shared["context"] : "No previous search";
             string question = (string)shared["question"];
 
-            _progressReporter.ReportProgress("decision", "Analyzing question...", 10);
-            _progressReporter.ReportIntermediateResult("decision", $"Analyzing: {question}");
+            _progressReporter.PrintMessage($"[决策节点] 分析问题: {question}");
 
             return new Tuple<string, string>(question, context);
         }
@@ -34,8 +33,7 @@ namespace PocketFlowSharpGallery.Models.WebSearchAgent
         {
             var (question, context) = (Tuple<string, string>)inputs;
 
-            _progressReporter.ReportProgress("decision", "Consulting AI for decision...", 20);
-            _progressReporter.ReportIntermediateResult("decision", "AI is deciding whether to search or answer directly...");
+            _progressReporter.PrintMessage("[决策节点] 咨询AI进行决策...");
 
             // 创建提示词帮助LLM决定下一步行动
             string prompt = $@"
@@ -82,14 +80,13 @@ IMPORTANT: Make sure to:
                 string yamlStr = response.Split("```yaml")[1].Split("```")[0].Trim();
                 var decision = Utils.ParseSimpleYaml(yamlStr);
 
-                _progressReporter.ReportIntermediateResult("decision", 
-                    $"AI decided to: {decision["action"]} (Reason: {decision["reason"]})");
+                _progressReporter.PrintMessage($"[决策节点] AI决定: {decision["action"]} (原因: {decision["reason"]})");
 
                 return decision;
             }
             catch (Exception ex)
             {
-                _progressReporter.ReportError($"Failed to parse LLM response: {ex.Message}");
+                _progressReporter.PrintMessage($"[决策节点] 错误: 解析LLM响应失败 - {ex.Message}");
                 
                 // 回退决策
                 return new Dictionary<string, object>
@@ -108,14 +105,12 @@ IMPORTANT: Make sure to:
             if (decision["action"].ToString() == "search")
             {
                 shared["search_query"] = decision["search_query"];
-                _progressReporter.ReportProgress("decision", $"Decision made: Search for '{decision["search_query"]}'", 30);
-                _progressReporter.ReportIntermediateResult("search", $"Preparing to search: {decision["search_query"]}");
+                _progressReporter.PrintMessage($"[决策节点] 决定搜索: {decision["search_query"]}");
             }
             else
             {
                 shared["context"] = decision["answer"];
-                _progressReporter.ReportProgress("decision", "Decision made: Answer directly", 30);
-                _progressReporter.ReportIntermediateResult("answer", "Preparing final answer...");
+                _progressReporter.PrintMessage("[决策节点] 决定直接回答");
             }
 
             return decision["action"]?.ToString() ?? "answer";

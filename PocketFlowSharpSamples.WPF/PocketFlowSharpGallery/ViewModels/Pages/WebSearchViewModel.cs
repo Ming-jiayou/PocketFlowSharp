@@ -25,15 +25,6 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         private string _searchStatus = "Ready";
 
         [ObservableProperty]
-        private int _progressValue = 0;
-
-        [ObservableProperty]
-        private string _currentStep = "";
-
-        [ObservableProperty]
-        private ObservableCollection<string> _intermediateMessages = new();
-
-        [ObservableProperty]
         private bool _canCancel = false;
 
         [ObservableProperty]
@@ -77,9 +68,6 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
             
             LoadConfiguration();
             LoadDatabaseConfigs();
-            
-            // 初始化中间消息集合
-            IntermediateMessages = new ObservableCollection<string>();
         }
 
         [RelayCommand]
@@ -105,8 +93,6 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
             CanCancel = true;
             SearchStatus = "Initializing...";
             Result = "";
-            ProgressValue = 0;
-            IntermediateMessages.Clear();
 
             try
             {
@@ -125,19 +111,18 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
                 // 处理问题的共享数据
                 var shared = new Dictionary<string, object> { { "question", Question } };
                 
-                _progressReporter.ReportProgress("init", "Starting search process...", 5);
+                _progressReporter.PrintMessage("[初始化] 开始搜索流程...");
                 
                 // 运行异步流程
                 await flow.RunAsync(shared);
 
                 // 获取最终结果
                 string answer = shared.ContainsKey("answer") ? shared["answer"].ToString() ?? "" : "No answer found";
-                Result = answer;
-
+                
                 // 添加到历史记录
                 SearchHistory.Insert(0, $"Q: {Question}\nA: {answer}\n");
 
-                _progressReporter.ReportComplete("Search completed successfully");
+                _progressReporter.PrintMessage(answer);
             }
             catch (OperationCanceledException)
             {
@@ -148,7 +133,7 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
             {
                 Result = $"Error: {ex.Message}";
                 SearchStatus = "Error occurred";
-                _progressReporter?.ReportError(ex.Message);
+                _progressReporter?.PrintMessage($"[错误] {ex.Message}");
             }
             finally
             {
@@ -176,8 +161,6 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         {
             Result = "";
             SearchStatus = "Ready";
-            ProgressValue = 0;
-            IntermediateMessages.Clear();
         }
 
         private AsyncFlow CreateAsyncFlow()
