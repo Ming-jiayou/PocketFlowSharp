@@ -21,8 +21,7 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         [ObservableProperty]
         private bool _isSearching = false;
 
-        [ObservableProperty]
-        private string _searchStatus = "Ready";
+        
 
         [ObservableProperty]
         private bool _canCancel = false;
@@ -91,7 +90,7 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
 
             IsSearching = true;
             CanCancel = true;
-            SearchStatus = "Initializing...";
+            
             Result = "";
 
             try
@@ -127,12 +126,11 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
             catch (OperationCanceledException)
             {
                 Result = "Search cancelled by user";
-                SearchStatus = "Cancelled";
+                
             }
             catch (Exception ex)
             {
                 Result = $"Error: {ex.Message}";
-                SearchStatus = "Error occurred";
                 _progressReporter?.PrintMessage($"[错误] {ex.Message}");
             }
             finally
@@ -160,7 +158,6 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         private void ClearResult()
         {
             Result = "";
-            SearchStatus = "Ready";
         }
 
         private AsyncFlow CreateAsyncFlow()
@@ -230,7 +227,7 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
             }
             catch (Exception ex)
             {
-                SearchStatus = $"Error loading configurations: {ex.Message}";
+                // Handle error loading configurations silently
             }
         }
 
@@ -267,21 +264,18 @@ namespace PocketFlowSharpGallery.ViewModels.Pages
         {
             // Save configuration to app settings
             // This can be implemented later to persist settings
-            SearchStatus = "Configuration saved";
         }
 
         [RelayCommand]
         private async Task RefreshConfigsAsync()
         {
-            SearchStatus = "Refreshing configurations...";
             try
             {
                 await Task.Run(LoadDatabaseConfigs);
-                SearchStatus = "Configurations refreshed successfully";
             }
             catch (Exception ex)
             {
-                SearchStatus = $"Error refreshing configurations: {ex.Message}";
+                // Handle error refreshing configurations silently
             }
         }
     }

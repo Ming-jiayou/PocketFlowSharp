@@ -80,10 +80,6 @@
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
                     <TextBlock Text="Search Results" FontSize="16" FontWeight="SemiBold"/>
-                    <TextBlock Text="{Binding SearchStatus}"
-                               FontSize="12"
-                               Foreground="Gray"
-                               Margin="10,2,0,0"/>
                 </StackPanel>
 
                 <ui:TextBox Grid.Row="1"
@@ -211,18 +207,6 @@
             </Grid>
         </Grid>
 
-        <!-- Status Bar -->
-        <Border Grid.Row="3" 
-                Background="LightGray" 
-                Padding="10,5"
-                Margin="0,20,0,0">
-            <StackPanel Orientation="Horizontal">
-                <ui:ProgressRing IsIndeterminate="{Binding IsSearching}" 
-                                 Width="16" 
-                                 Height="16"
-                                 Margin="0,0,10,0"/>
-                <TextBlock Text="{Binding SearchStatus}" FontSize="12"/>
-            </StackPanel>
-        </Border>
+        <!-- Footer -->
     </Grid>
 </Page>
